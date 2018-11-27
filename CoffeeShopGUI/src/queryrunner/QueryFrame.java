@@ -35,6 +35,7 @@ public class QueryFrame extends javax.swing.JFrame
       {jTextField5, jTextField6, jTextField7, jTextField8, jTextField9,
             jTextField10, jTextField11, jTextField12};
       m_queryrunner = queryrunnerObj;
+      
       // Find out how many queries there are and set up combox box
       // If it is a grid query, then enable jtable
       int nAmt = m_queryrunner.GetTotalQueries();
