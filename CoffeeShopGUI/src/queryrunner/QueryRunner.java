@@ -78,7 +78,23 @@ public class QueryRunner
       			+ "COMP_PROD_UNIT_MEASUREMENT FROM MENU_ITEM M INNER JOIN "
       			+ "MENU_ITEM_contains_COMPONENT_PRODUCT MC ON M.MENU_ITEM_ID = MC.MENU_ITEM_ID INNER JOIN "
       			+ "COMPONENT_PRODUCT C ON MC.COMP_PROD_ID = C.COMP_PROD_ID";
-
+      
+      
+      String farmerCertDesc = "All farmers and their certifications.";
+      
+      String farmerCertQuery = "SELECT v.VENDOR_COMPANY_NAME, cf.FARMER_CERT_DATE, c.CERT_DESC" +
+            " FROM coffee_farmer_has_certification cf, vendor_list v, certification c " +
+            "WHERE v.vendor_id = cf.vendor_id AND cf.cert_id = c.cert_id " +
+            "ORDER BY v.vendor_company_name"; 
+      
+      
+      String farmerProdDesc = "Calculating each farmer’s productivity (yield/acre)";
+      String farmerProdQuery = "SELECT COFFEE_FARMER.VENDOR_ID, " +
+            "VENDOR_LIST.VENDOR_COMPANY_NAME, VENDOR_LIST.VENDOR_ADDRESS_COUNTRY, " +
+            "COFFEE_FARMER.COFFEE_FARMER_ANNUAL_YIELD / COFFEE_FARMER.COFFEE_FARMER_ACREAGE " +
+            "AS YIELD_PER_ACRE FROM COFFEE_FARMER JOIN VENDOR_LIST ON " +
+            "COFFEE_FARMER.VENDOR_ID = VENDOR_LIST.VENDOR_ID ORDER BY " +
+            "YIELD_PER_ACRE DESC";
 
       // You will need to put your Project Application in the below variable
 
@@ -115,6 +131,8 @@ public class QueryRunner
       m_queryArray.add(new QueryData(storeContactQueryDesc, storeContactQuery, 
     		  null, null, false, false));
       m_queryArray.add(new QueryData(recipeQueryDesc, recipeQuery, null, null, false, false));
+      m_queryArray.add(new QueryData(farmerCertDesc, farmerCertQuery, null, null, false, false));
+      m_queryArray.add(new QueryData(farmerProdDesc, farmerProdQuery, null, null, false, false));
 
      
       // m_queryArray.add(new QueryData("Select * from contact where
