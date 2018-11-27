@@ -68,6 +68,7 @@ public class QueryRunner
       		"GROUP BY \r\n" + 
       		"S.STORE_ID; \r\n" ;
       
+      
       // You will need to put your Project Application in the below variable
 
       this.m_projectTeamApplication = "No Dozin' Coffee Roasters"; // THIS
