@@ -25,7 +25,7 @@ public class QueryRunner
 {
 	
 	/**
-	 * HELLOOO CCHHHANNNGING
+	 * HELLOOO CCHHHANNNGING FROM EM
 	 */
 
    public QueryRunner()
