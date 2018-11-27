@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package queryrunner;
-// Steph test again
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -57,21 +56,14 @@ public class QueryRunner
       String storeContactQueryDesc = "Number of employees per store with "
       		+ "store/manager contact information";
       
-      String storeContactQuery = "SELECT\r\n" + 
-      		"E.STORE_ID,\r\n" + 
-      		"CONCAT(S.STORE_ADDRESS_ST_NUMBER, \" \", S.STORE_ADDRESS_STREET_NAME) AS LOCATION,\r\n" + 
-      		"COUNT(*) as NUMBER_OF_EMPS,\r\n" + 
-      		"CONCAT(E.EMP_FNAME, \" \", E.EMP_LNAME) AS MANAGER, \r\n" + 
-      		"S.STORE_PHONE, \r\n" + 
-      		"E.EMP_PHONE    \r\n" + 
-      		"FROM \r\n" + 
-      		"EMPLOYEE E\r\n" + 
-      		"INNER JOIN \r\n" + 
-      		"STORE S on E.STORE_ID = S.STORE_ID \r\n" + 
-      		"GROUP BY \r\n" + 
-      		"S.STORE_ID; \r\n" ;
+      String storeContactQuery = "SELECT E.STORE_ID, CONCAT(S.STORE_ADDRESS_ST_NUMBER, \" \", "
+      		+ "S.STORE_ADDRESS_STREET_NAME) AS LOCATION, COUNT(*) as NUMBER_OF_EMPS," + 
+      		"CONCAT(E.EMP_FNAME, \" \", E.EMP_LNAME) AS MANAGER, S.STORE_PHONE, " + 
+      		"E.EMP_PHONE FROM EMPLOYEE E INNER JOIN STORE S on "
+      		+ "E.STORE_ID = S.STORE_ID GROUP BY S.STORE_ID;" ;
       
       String recipeQueryDesc = "Recipe for each menu item";
+      
       String recipeQuery = "SELECT MENU_ITEM_DESC, COMP_PROD_DESC, COMP_PROD_QTY_PER_1_MENU_ITEM,"
       			+ "COMP_PROD_UNIT_MEASUREMENT FROM MENU_ITEM M INNER JOIN "
       			+ "MENU_ITEM_contains_COMPONENT_PRODUCT MC ON M.MENU_ITEM_ID = MC.MENU_ITEM_ID INNER JOIN "
@@ -112,7 +104,9 @@ public class QueryRunner
 
       m_queryArray.add(new QueryData(storeContactQueryDesc, storeContactQuery, 
     		  null, null, false, false));
-      m_queryArray.add(new QueryData(recipeQueryDesc, recipeQuery, null, null, false, false));
+      
+      m_queryArray.add(new QueryData(recipeQueryDesc, recipeQuery, null, 
+    		  null, false, false));
 
      
       // m_queryArray.add(new QueryData("Select * from contact where
