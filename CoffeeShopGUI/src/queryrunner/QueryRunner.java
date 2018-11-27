@@ -20,6 +20,7 @@ public class QueryRunner {
     
     public QueryRunner()
     {
+       // 
         this.m_jdbcData = new QueryJDBC();
         m_updateAmount = 0;
         m_queryArray = new ArrayList<>();
@@ -30,7 +31,7 @@ public class QueryRunner {
         
         // You will need to put your Project Application in the below variable
         
-        this.m_projectTeamApplication="CITYELECTION";    // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+        this.m_projectTeamApplication="No Dozin' Coffee Roasters";    // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
         
         // Each row that is added to m_queryArray is a separate query. It does not work on Stored procedure calls.
         // The 'new' Java keyword is a way of initializing the data that will be added to QueryArray. Please do not change
