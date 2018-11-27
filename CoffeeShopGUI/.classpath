@@ -6,8 +6,20 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/yvro/Desktop/CS_Certificate/5021_Database_Systems/queryrunner/dist/lib/AbsoluteLayout.jar"/>
-	<classpathentry kind="lib" path="/Users/yvro/Desktop/CS_Certificate/5021_Database_Systems/queryrunner/dist/lib/mysql-connector-java-8.0.12.jar"/>
-	<classpathentry kind="lib" path="/Users/yvro/Desktop/CS_Certificate/5021_Database_Systems/queryrunner/dist/QueryRunner.jar"/>
+	<classpathentry kind="lib" path="C:/Users/emayr/Dropbox/SU 5021/queryrunner/dist/QueryRunner.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/emayr/Dropbox/SU 5021/queryrunner/dist/lib/AbsoluteLayout.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/emayr/Dropbox/SU 5021/queryrunner/dist/lib/mysql-connector-java-8.0.12.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
