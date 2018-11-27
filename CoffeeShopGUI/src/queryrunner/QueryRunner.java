@@ -38,6 +38,8 @@ public class QueryRunner
 
       // TODO - You will need to change the queries below to match your
       // queries.
+      
+      // hello
 
       String vendorListQuery = "SELECT VENDOR_COMPANY_NAME, YEAR(SYSDATE()) " +
             "- YEAR(VENDOR_SINCE_DATE) AS Num_Years_As_Vendor, VENDOR_SINCE_DATE " +
