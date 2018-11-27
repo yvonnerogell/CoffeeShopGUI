@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="CoffeeShopGUI/src"/>
+	<classpathentry kind="lib" path="/Users/zacharybax/Desktop/queryrunner/dist/QueryRunner.jar"/>
+	<classpathentry kind="lib" path="/Users/zacharybax/Desktop/queryrunner/dist/lib/AbsoluteLayout.jar"/>
+	<classpathentry kind="lib" path="/Users/zacharybax/Desktop/queryrunner/dist/lib/mysql-connector-java-8.0.12.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
