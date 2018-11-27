@@ -71,7 +71,7 @@ public class QueryRunner
       String recipeQueryDesc = "Recipe for each menu item";
       String recipeQuery = "SELECT MENU_ITEM_DESC, COMP_PROD_DESC, COMP_PROD_QTY_PER_1_MENU_ITEM,"
       			+ "COMP_PROD_UNIT_MEASUREMENT FROM MENU_ITEM M INNER JOIN "
-      			+ "MENU_ITEM_contains_COMPONENT_PRODUCT MC ON M.MENU_ITEM_ID = MC.MENU_ITEM_ID INNER JOIN"
+      			+ "MENU_ITEM_contains_COMPONENT_PRODUCT MC ON M.MENU_ITEM_ID = MC.MENU_ITEM_ID INNER JOIN "
       			+ "COMPONENT_PRODUCT C ON MC.COMP_PROD_ID = C.COMP_PROD_ID";
 
 
