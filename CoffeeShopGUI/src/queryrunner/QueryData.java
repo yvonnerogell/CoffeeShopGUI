@@ -14,6 +14,9 @@ import java.util.ArrayList;
 public class QueryData {
      QueryData()
     {
+    	 /**
+    	  * HELLO YVONNE
+    	  */
     }
 //    QueryData(String query)
 //    {
