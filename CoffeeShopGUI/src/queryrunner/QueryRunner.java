@@ -68,7 +68,13 @@ public class QueryRunner
       		"GROUP BY \r\n" + 
       		"S.STORE_ID; \r\n" ;
       
-      
+      String recipeQueryDesc = "Recipe for each menu item";
+      String recipeQuery = "SELECT MENU_ITEM_DESC, COMP_PROD_DESC, COMP_PROD_QTY_PER_1_MENU_ITEM,"
+      			+ "COMP_PROD_UNIT_MEASUREMENT FROM MENU_ITEM M INNER JOIN "
+      			+ "MENU_ITEM_contains_COMPONENT_PRODUCT MC ON M.MENU_ITEM_ID = MC.MENU_ITEM_ID INNER JOIN"
+      			+ "COMPONENT_PRODUCT C ON MC.COMP_PROD_ID = C.COMP_PROD_ID";
+
+
       // You will need to put your Project Application in the below variable
 
       this.m_projectTeamApplication = "No Dozin' Coffee Roasters"; // THIS
@@ -100,6 +106,7 @@ public class QueryRunner
             null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
       m_queryArray.add(new QueryData(equipServiceDesc, equipServiceQuery, null,
             null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+      m_queryArray.add(new QueryData(recipeQueryDesc, recipeQuery, null, null, false, false));
      
       // m_queryArray.add(new QueryData("Select * from contact where
       // contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},
