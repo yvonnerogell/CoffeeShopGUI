@@ -15,7 +15,7 @@ public class QueryData {
      QueryData()
     {
     	 /**
-    	  * HELLO HELLO YVONNE
+    	  * HELLO YVONNE
     	  */
     }
 //    QueryData(String query)
