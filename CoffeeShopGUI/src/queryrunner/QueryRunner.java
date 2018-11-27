@@ -33,6 +33,16 @@ public class QueryRunner
             "FROM VENDOR_LIST ORDER BY VENDOR_SINCE_DATE";
       String vendorListDesc = "List of vendors ordered by oldest to newest, " +
             "incl. column with years as vendor.";
+      
+      String equipServiceQuery = "SELECT T.EQUIP_TYPE_DESC, E.STORE_ID, \r\n" + 
+            "E.EQUIP_PURCHASE_DATE, E.EQUIP_LAST_SERVICED, " +
+            "E.EQUIP_SERVICE_FREQUENCY_DAYS, DATE_ADD(EQUIP_LAST_SERVICED, " +
+            "INTERVAL EQUIP_SERVICE_FREQUENCY_DAYS DAY) AS NEXT_SERVICE_DATE" +
+            " FROM EQUIPMENT E JOIN EQUIPMENT_TYPE T ON E.EQUIP_TYPE_ID = " +
+            "T.EQUIP_TYPE_ID ORDER BY NEXT_SERVICE_DATE";
+            
+      String equipServiceDesc = "Next service due date by piece of equipment";
+      
       // You will need to put your Project Application in the below variable
 
       this.m_projectTeamApplication = "No Dozin' Coffee Roasters"; // THIS
@@ -62,6 +72,9 @@ public class QueryRunner
 
       m_queryArray.add(new QueryData(vendorListDesc, vendorListQuery, null,
             null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+      m_queryArray.add(new QueryData(equipServiceDesc, equipServiceQuery, null,
+            null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+     
       // m_queryArray.add(new QueryData("Select * from contact where
       // contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},
       // false, true)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
