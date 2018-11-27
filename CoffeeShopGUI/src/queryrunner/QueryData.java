@@ -20,8 +20,9 @@ public class QueryData {
 //        m_queryString = query;
 //    }
     
-    QueryData(String query, String[] parms, boolean [] likeparms, boolean isAction, boolean isParm)
+    QueryData(String desc, String query, String[] parms, boolean [] likeparms, boolean isAction, boolean isParm)
     {
+       m_queryDesc = desc;
         m_queryString = query;
         m_arrayParms = parms;
         m_arrayLikeParms = likeparms;
@@ -36,6 +37,11 @@ public class QueryData {
 //        m_isAction = isAction;
 //        m_isParms = isParm;
 //    }
+    
+    String getQueryDesc()
+    {
+        return m_queryDesc;
+    }
     
     String GetQueryString()
     {
@@ -77,6 +83,7 @@ public class QueryData {
     }
      
     private String m_queryString;
+    private String m_queryDesc;
     private String [] m_arrayParms;
     private boolean m_isAction;
     private boolean m_isParms;   

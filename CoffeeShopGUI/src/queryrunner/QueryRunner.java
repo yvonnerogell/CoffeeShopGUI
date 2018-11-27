@@ -29,6 +29,11 @@ public class QueryRunner {
         
         // TODO - You will need to change the queries below to match your queries.
         
+        String vendorListQuery = "SELECT VENDOR_COMPANY_NAME, YEAR(SYSDATE()) " +
+              "- YEAR(VENDOR_SINCE_DATE) AS Num_Years_As_Vendor, VENDOR_SINCE_DATE " + 
+              "FROM VENDOR_LIST ORDER BY VENDOR_SINCE_DATE";
+        String vendorListDesc = "List of vendors ordered by oldest to newest, " +
+              "incl. column with years as vendor.";
         // You will need to put your Project Application in the below variable
         
         this.m_projectTeamApplication="No Dozin' Coffee Roasters";    // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
@@ -43,10 +48,10 @@ public class QueryRunner {
         //    IsItActionQuery (e.g. Mark it true if it is, otherwise false)
         //    IsItParameterQuery (e.g.Mark it true if it is, otherwise false)
         
-        m_queryArray.add(new QueryData("Select * from contact", null, null, false, false));   // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-        m_queryArray.add(new QueryData("Select * from contact where contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},  false, true));        // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-        m_queryArray.add(new QueryData("Select * from contact where contact_name like ?", new String [] {"CONTACT_NAME"}, new boolean [] {true}, false, true));        // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-        m_queryArray.add(new QueryData("insert into contact (contact_id, contact_name, contact_salary) values (?,?,?)",new String [] {"CONTACT_ID", "CONTACT_NAME", "CONTACT_SALARY"}, new boolean [] {false, false, false}, true, true));// THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+        m_queryArray.add(new QueryData(vendorListDesc, vendorListQuery, null, null, false, false));   // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+       // m_queryArray.add(new QueryData("Select * from contact where contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},  false, true));        // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+        //m_queryArray.add(new QueryData("Select * from contact where contact_name like ?", new String [] {"CONTACT_NAME"}, new boolean [] {true}, false, true));        // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+       // m_queryArray.add(new QueryData("insert into contact (contact_id, contact_name, contact_salary) values (?,?,?)",new String [] {"CONTACT_ID", "CONTACT_NAME", "CONTACT_SALARY"}, new boolean [] {false, false, false}, true, true));// THIS NEEDS TO CHANGE FOR YOUR APPLICATION
                        
     }
        
@@ -72,6 +77,12 @@ public class QueryRunner {
     {
         QueryData e=m_queryArray.get(queryChoice);
         return e.GetQueryString();        
+    }
+    
+    public String getQueryDesc(int queryChoice)
+    {
+        QueryData e=m_queryArray.get(queryChoice);
+        return e.getQueryDesc();        
     }
     
     /**

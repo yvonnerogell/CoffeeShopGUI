@@ -213,7 +213,7 @@ public class QueryFrame extends javax.swing.JFrame {
 
         jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel14.setText("Voter Application");
-        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 180, -1));
+        getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 280, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -274,7 +274,8 @@ public class QueryFrame extends javax.swing.JFrame {
         String szStripChoice = szChoice.substring(6);
         m_queryChoice = Integer.parseInt(szStripChoice)-1;        
         String szQuery = m_queryrunner.GetQueryText(m_queryChoice);
-        this.jTextArea1.setText(szQuery);
+        String queryDesc = m_queryrunner.getQueryDesc(m_queryChoice);
+        this.jTextArea1.setText(queryDesc);
         System.out.println("choice is " + szChoice);
         this.jPanel2.setVisible(false);        
          
