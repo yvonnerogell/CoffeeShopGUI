@@ -5,7 +5,14 @@
  */
 package queryrunner;
 
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * QueryRunner takes a list of Queries that are initialized in it's constructor
@@ -230,6 +237,8 @@ public class QueryRunner
 
    public static void main(String[] args)
    {
+      
+     
       // TODO code application logic here
 
       final QueryRunner queryrunner = new QueryRunner();
@@ -240,8 +249,8 @@ public class QueryRunner
          {
             public void run()
             {
-
                new QueryFrame(queryrunner).setVisible(true);
+
             }
          });
       }

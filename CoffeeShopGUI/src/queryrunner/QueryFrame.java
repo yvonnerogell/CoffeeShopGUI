@@ -11,7 +11,10 @@ package queryrunner;
  */
 import java.util.ArrayList;
 import java.util.List;
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
+
 import javax.swing.*;
 
 public class QueryFrame extends javax.swing.JFrame
@@ -27,6 +30,21 @@ public class QueryFrame extends javax.swing.JFrame
     */
    public QueryFrame(QueryRunner queryrunnerObj)
    {
+      
+      // added from here
+      // ImagePanel panel = new ImagePanel(
+      //      new ImageIcon("Roasted_coffee_beans.jpg").getImage());
+      
+      //getContentPane().add(panel);
+      //pack();
+      //setVisible(true); 
+      setLayout(new BorderLayout());
+      setContentPane(new JLabel(new ImageIcon("Roasted_coffee_beans.jpg")));
+      setLayout(new FlowLayout());
+      
+      // to here
+      
+      getContentPane().setBackground(new Color(153, 102, 51));
       initComponents();
       m_parmlabels = new JLabel[]
       {jLabel1, jLabel2, jLabel3, jLabel4, jLabel9, jLabel10, jLabel11,
@@ -284,7 +302,7 @@ public class QueryFrame extends javax.swing.JFrame
                   -1));
 
       jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-      jLabel14.setText("Voter Application");
+      jLabel14.setText("No Dozin' Coffee Roasters");
       getContentPane().add(jLabel14,
             new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 280,
                   -1));
