@@ -38,6 +38,8 @@ public class QueryRunner
 
       // TODO - You will need to change the queries below to match your
       // queries.
+      
+      // hello
 
       String vendorListQuery = "SELECT VENDOR_COMPANY_NAME, YEAR(SYSDATE()) " +
             "- YEAR(VENDOR_SINCE_DATE) AS Num_Years_As_Vendor, VENDOR_SINCE_DATE " +
@@ -53,6 +55,9 @@ public class QueryRunner
             "T.EQUIP_TYPE_ID ORDER BY NEXT_SERVICE_DATE";
             
       String equipServiceDesc = "Next service due date by piece of equipment";
+      
+      String storeContactQueryDesc = "Number of employees per store with "
+      		+ "store/manager contact information";
       
       String storeContactQuery = "SELECT\r\n" + 
       		"E.STORE_ID,\r\n" + 
@@ -75,6 +80,7 @@ public class QueryRunner
       			+ "MENU_ITEM_contains_COMPONENT_PRODUCT MC ON M.MENU_ITEM_ID = MC.MENU_ITEM_ID INNER JOIN "
       			+ "COMPONENT_PRODUCT C ON MC.COMP_PROD_ID = C.COMP_PROD_ID";
       
+
       String profitabilityDesc = "Menu item profitability";
       
       String profitabilityQuery = "SELECT MENU_ITEM_DESC, MENU_ITEM_RETAIL_PRICE, "
@@ -85,6 +91,23 @@ public class QueryRunner
       			+ "COMPONENT_PRODUCT C ON MC.COMP_PROD_ID = C.COMP_PROD_ID GROUP BY MENU_ITEM_DESC "
       			+ "ORDER BY MARKUP_PERCENTAGE DESC"; 
 
+
+
+      String farmerCertDesc = "All farmers and their certifications.";
+      
+      String farmerCertQuery = "SELECT v.VENDOR_COMPANY_NAME, cf.FARMER_CERT_DATE, c.CERT_DESC" +
+            " FROM coffee_farmer_has_certification cf, vendor_list v, certification c " +
+            "WHERE v.vendor_id = cf.vendor_id AND cf.cert_id = c.cert_id " +
+            "ORDER BY v.vendor_company_name"; 
+      
+      
+      String farmerProdDesc = "Calculating each farmer’s productivity (yield/acre)";
+      String farmerProdQuery = "SELECT COFFEE_FARMER.VENDOR_ID, " +
+            "VENDOR_LIST.VENDOR_COMPANY_NAME, VENDOR_LIST.VENDOR_ADDRESS_COUNTRY, " +
+            "COFFEE_FARMER.COFFEE_FARMER_ANNUAL_YIELD / COFFEE_FARMER.COFFEE_FARMER_ACREAGE " +
+            "AS YIELD_PER_ACRE FROM COFFEE_FARMER JOIN VENDOR_LIST ON " +
+            "COFFEE_FARMER.VENDOR_ID = VENDOR_LIST.VENDOR_ID ORDER BY " +
+            "YIELD_PER_ACRE DESC";
 
 
       // You will need to put your Project Application in the below variable
@@ -118,9 +141,18 @@ public class QueryRunner
             null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
       m_queryArray.add(new QueryData(equipServiceDesc, equipServiceQuery, null,
             null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+
+      m_queryArray.add(new QueryData(storeContactQueryDesc, storeContactQuery, 
+    		  null, null, false, false));
       m_queryArray.add(new QueryData(recipeQueryDesc, recipeQuery, null, null, false, false));
+
       m_queryArray.add(new QueryData(profitabilityDesc, profitabilityQuery, null, null, false, false));
       
+
+      m_queryArray.add(new QueryData(farmerCertDesc, farmerCertQuery, null, null, false, false));
+      m_queryArray.add(new QueryData(farmerProdDesc, farmerProdQuery, null, null, false, false));
+
+     
       // m_queryArray.add(new QueryData("Select * from contact where
       // contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},
       // false, true)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
