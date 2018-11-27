@@ -83,7 +83,6 @@ public class QueryRunner
       			+ "ORDER BY MARKUP_PERCENTAGE DESC"; 
 
 
-
       String farmerCertDesc = "All farmers and their certifications.";
       
       String farmerCertQuery = "SELECT v.VENDOR_COMPANY_NAME, cf.FARMER_CERT_DATE, c.CERT_DESC" +
