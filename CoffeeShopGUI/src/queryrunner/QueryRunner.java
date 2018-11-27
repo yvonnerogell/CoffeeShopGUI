@@ -54,6 +54,20 @@ public class QueryRunner
             
       String equipServiceDesc = "Next service due date by piece of equipment";
       
+      String storeContactQuery = "SELECT\r\n" + 
+      		"E.STORE_ID,\r\n" + 
+      		"CONCAT(S.STORE_ADDRESS_ST_NUMBER, \" \", S.STORE_ADDRESS_STREET_NAME) AS LOCATION,\r\n" + 
+      		"COUNT(*) as NUMBER_OF_EMPS,\r\n" + 
+      		"CONCAT(E.EMP_FNAME, \" \", E.EMP_LNAME) AS MANAGER, \r\n" + 
+      		"S.STORE_PHONE, \r\n" + 
+      		"E.EMP_PHONE    \r\n" + 
+      		"FROM \r\n" + 
+      		"EMPLOYEE E\r\n" + 
+      		"INNER JOIN \r\n" + 
+      		"STORE S on E.STORE_ID = S.STORE_ID \r\n" + 
+      		"GROUP BY \r\n" + 
+      		"S.STORE_ID; \r\n" ;
+      
       // You will need to put your Project Application in the below variable
 
       this.m_projectTeamApplication = "No Dozin' Coffee Roasters"; // THIS
