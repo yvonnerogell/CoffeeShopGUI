@@ -54,6 +54,9 @@ public class QueryRunner
             
       String equipServiceDesc = "Next service due date by piece of equipment";
       
+      String storeContactQueryDesc = "Number of employees per store with "
+      		+ "store/manager contact information";
+      
       String storeContactQuery = "SELECT\r\n" + 
       		"E.STORE_ID,\r\n" + 
       		"CONCAT(S.STORE_ADDRESS_ST_NUMBER, \" \", S.STORE_ADDRESS_STREET_NAME) AS LOCATION,\r\n" + 
@@ -100,6 +103,8 @@ public class QueryRunner
             null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
       m_queryArray.add(new QueryData(equipServiceDesc, equipServiceQuery, null,
             null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+      m_queryArray.add(new QueryData(storeContactQueryDesc, storeContactQuery, 
+    		  null, null, false, false));
      
       // m_queryArray.add(new QueryData("Select * from contact where
       // contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},
