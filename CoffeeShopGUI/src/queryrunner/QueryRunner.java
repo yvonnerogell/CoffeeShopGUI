@@ -107,6 +107,24 @@ public class QueryRunner
       			+ "ON C.CUST_TRANS_ID = T.CUST_TRANS_ID INNER JOIN MENU_ITEM M ON T.MENU_ITEM_ID = "
       			+ "M.MENU_ITEM_ID WHERE C.CUST_TRANS_DATE_TIME BETWEEN ? AND ? GROUP BY"
       			+ " MENU_ITEM_DESC WITH ROLLUP";
+      
+      String addStore = 
+      		"INSERT INTO STORE " + 
+      		"	(STORE_PHONE, " + 
+      		"    STORE_ADDRESS_ST_NUMBER, " + 
+      		"    STORE_ADDRESS_STREET_NAME, " + 
+      		"    STORE_ADDRESS_CITY, " + 
+      		"    STORE_ADDRESS_STATE, " + 
+      		"    STORE_ADDRESS_ZIP, " + 
+      		"    STORE_OPEN_DATE) " + 
+      		"VALUES(?, ?, ?, ?, ?, ?, curdate()); " + 
+      		
+      		"UPDATE EMPLOYEE E " + 
+      		"SET E.JOB_TITLE_ID = 1, E.EMP_HOURLY_PAY_RATE = ?, E.STORE_ID = (SELECT LAST_INSERT_ID()) " + 
+      		"WHERE E.EMPLOYEE_ID = ?; " + 
+      		"COMMIT;";
+      
+      String addStoreDesc = "SOMETHING";
 
       
       
@@ -151,6 +169,10 @@ public class QueryRunner
       
       m_queryArray.add(new QueryData(totalSalesDesc, totalSalesQuery, 
       			new String [] {"START_DATE", "END_DATE"}, new boolean [] {false, false}, false, true));
+      
+      m_queryArray.add(new QueryData(addStoreDesc, addStore, new String[] {"PHONE", "STREET_NUM", 
+      "STREET_NAME", "CITY", "STATE", "ZIP", "MANAGER_PAY", "PROMOTED_EMP_ID"}, new boolean [] {false, false, false, false, false, false, false, false}, true, true));
+      
 
 
       // new SimpleDateFormat(“yyyy-MM-dd”) {“START_DATE”}, new SimpleDateFormat(“yyyy-mm-dd”) {“END_DATE”}, 
