@@ -88,7 +88,7 @@ public class QueryRunner
       String farmerCertQuery = "SELECT v.VENDOR_COMPANY_NAME, cf.FARMER_CERT_DATE, c.CERT_DESC" +
             " FROM coffee_farmer_has_certification cf, vendor_list v, certification c " +
             "WHERE v.vendor_id = cf.vendor_id AND cf.cert_id = c.cert_id " +
-            "ORDER BY v.vendor_company_name"; 
+            "ORDER BY v.vendor_company_name";
       
       
       String farmerProdDesc = "Calculating each farmer’s productivity (yield/acre)";
