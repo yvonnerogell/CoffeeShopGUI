@@ -92,15 +92,15 @@ public class QueryRunner
             "ORDER BY v.vendor_company_name";
       
       
-      String farmerProdDesc = "Calculating each farmerâ€™s productivity (yield/acre)";
+      String farmerProdDesc = "Calculating each farmer's productivity (yield/acre)";
       String farmerProdQuery = "SELECT COFFEE_FARMER.VENDOR_ID, " +
             "VENDOR_LIST.VENDOR_COMPANY_NAME, VENDOR_LIST.VENDOR_ADDRESS_COUNTRY, " +
-            "COFFEE_FARMER.COFFEE_FARMER_ANNUAL_YIELD / COFFEE_FARMER.COFFEE_FARMER_ACREAGE " +
+            "ROUND(COFFEE_FARMER.COFFEE_FARMER_ANNUAL_YIELD / COFFEE_FARMER.COFFEE_FARMER_ACREAGE, 2) " +
             "AS YIELD_PER_ACRE FROM COFFEE_FARMER JOIN VENDOR_LIST ON " +
             "COFFEE_FARMER.VENDOR_ID = VENDOR_LIST.VENDOR_ID ORDER BY " +
             "YIELD_PER_ACRE DESC";
 
-      String totalSalesDesc = "Total sales by menu item";
+      String totalSalesDesc = "Total sales by menu item\n\nEnter dates in the following format: yyyy-mm-dd";
       
       String totalSalesQuery = "SELECT MENU_ITEM_DESC,ROUND(SUM(TRANS_LINE_ITEM_UNIT_QTY * "
       			+ "MENU_ITEM_RETAIL_PRICE),2) AS TOTAL_SALES, SUM(TRANS_LINE_ITEM_UNIT_QTY) AS TOTAL_UNITS"

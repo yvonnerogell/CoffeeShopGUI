@@ -16,6 +16,8 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.*;
+import java.awt.Font;
+import java.awt.SystemColor;
 
 public class QueryFrame extends javax.swing.JFrame
 {
@@ -38,9 +40,9 @@ public class QueryFrame extends javax.swing.JFrame
       //getContentPane().add(panel);
       //pack();
       //setVisible(true); 
-      setLayout(new BorderLayout());
+      getContentPane().setLayout(new BorderLayout());
       setContentPane(new JLabel(new ImageIcon("Roasted_coffee_beans.jpg")));
-      setLayout(new FlowLayout());
+      getContentPane().setLayout(new FlowLayout());
       
       // to here
       
@@ -99,6 +101,13 @@ public class QueryFrame extends javax.swing.JFrame
       jLabel10 = new javax.swing.JLabel();
       jLabel11 = new javax.swing.JLabel();
       jLabel12 = new javax.swing.JLabel();
+      
+      jLabelQueries = new javax.swing.JLabel();
+      jLabelQueries.setHorizontalAlignment(SwingConstants.CENTER);
+      jLabelQueries.setVerticalAlignment(SwingConstants.TOP);
+      jLabelQueries.setBackground(SystemColor.window);
+      jLabelQueryDetails = new javax.swing.JLabel();
+      jLabelQueryDetails.setVerticalAlignment(SwingConstants.TOP);
       jTextField9 = new javax.swing.JTextField();
       jTextField10 = new javax.swing.JTextField();
       jTextField11 = new javax.swing.JTextField();
@@ -106,14 +115,23 @@ public class QueryFrame extends javax.swing.JFrame
       jPanel2 = new javax.swing.JPanel();
       jComboBox1 = new javax.swing.JComboBox<>();
       jLabel5 = new javax.swing.JLabel();
+      jLabel5.setFont(new Font("Arial Black", Font.BOLD, 13));
       jLabel6 = new javax.swing.JLabel();
+      jLabel6.setBackground(SystemColor.window);
+      jLabel6.setFont(new Font("Arial Black", Font.BOLD, 13));
       jLabel7 = new javax.swing.JLabel();
+      jLabel7.setBackground(SystemColor.window);
+      jLabel7.setFont(new Font("Arial Black", Font.BOLD, 13));
       jLabel8 = new javax.swing.JLabel();
+      jLabel8.setFont(new Font("Arial Black", Font.BOLD, 13));
       jButton1 = new javax.swing.JButton();
       jButton2 = new javax.swing.JButton();
       jPasswordField1 = new javax.swing.JPasswordField();
       jLabel13 = new javax.swing.JLabel();
       jLabel14 = new javax.swing.JLabel();
+      jLabel14.setVerticalAlignment(SwingConstants.TOP);
+      jLabel14.setForeground(SystemColor.activeCaptionText);
+      jLabel14.setBackground(SystemColor.window);
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
       getContentPane().setLayout(
@@ -228,14 +246,15 @@ public class QueryFrame extends javax.swing.JFrame
                   -1));
 
       getContentPane().add(jPanel1,
-            new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 980,
+            new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 1000,
                   130));
 
       jPanel2.setLayout(new java.awt.BorderLayout());
       getContentPane().add(jPanel2,
-            new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 980,
+            new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 1000,
                   240));
 
+      //jComboBox1.setOpaque(true);
       jComboBox1.addActionListener(new java.awt.event.ActionListener()
       {
          public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -247,23 +266,27 @@ public class QueryFrame extends javax.swing.JFrame
             new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 120,
                   -1));
 
-      jLabel5.setText("Database");
+      jLabel5.setText(" Database");
+     // jLabel5.setOpaque(true);
       getContentPane().add(jLabel5,
             new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 90,
-                  10));
+                  -1));
 
-      jLabel6.setText("Hostname");
+      jLabel6.setText(" Hostname");
+     // jLabel6.setOpaque(true);
       getContentPane().add(jLabel6,
             new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 90, -1));
 
-      jLabel7.setText("User");
+      jLabel7.setText(" User");
+    //  jLabel7.setOpaque(true);
       getContentPane().add(jLabel7,
-            new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 100,
+            new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90,
                   -1));
 
-      jLabel8.setText("Password");
+      jLabel8.setText(" Password");
+     // jLabel8.setOpaque(true);
       getContentPane().add(jLabel8,
-            new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 80,
+            new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90,
                   -1));
 
       jButton1.setText("Connect");
@@ -279,6 +302,8 @@ public class QueryFrame extends javax.swing.JFrame
                   -1));
 
       jButton2.setText("Run Query");
+     // jButton2.setOpaque(true);
+      jButton2.setBackground(SystemColor.window);
       jButton2.addActionListener(new java.awt.event.ActionListener()
       {
          public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -296,16 +321,41 @@ public class QueryFrame extends javax.swing.JFrame
             new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 110, 120,
                   -1));
 
-      jLabel13.setText("Output");
+      jLabel13.setText(" Output ");
+      jLabel13.setOpaque(true);
       getContentPane().add(jLabel13,
-            new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 190, -1,
+            new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 20, -1,
                   -1));
 
-      jLabel14.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+      jLabel14.setFont(new Font("Adobe Gothic Std", Font.BOLD, 22)); // NOI18N
       jLabel14.setText("No Dozin' Coffee Roasters");
+      jLabel14.setOpaque(true);
+      
       getContentPane().add(jLabel14,
-            new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 280,
-                  -1));
+            new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 1000,
+                  180));
+      
+      jLabelQueryDetails.setFont(new Font("Helvetica", Font.BOLD, 12)); // NOI18N
+      jLabelQueryDetails.setText("Query 1: List of vendors");
+     // jLabelQueryDetails.setOpaque(true);
+      
+      getContentPane().add(jLabelQueryDetails,
+            new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 40, 180,
+                  550));
+      
+      
+      jLabelQueries.setFont(new Font("Adobe Gothic Std", Font.BOLD, 22)); // NOI18N
+      jLabelQueries.setText("Query Details");
+      jLabelQueries.setOpaque(true);
+      
+      getContentPane().add(jLabelQueries,
+            new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, 200,
+                  600));
+      
+      
+      //getContentPane().add(jLabel14,
+       //     new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 280,
+       //           -1));
 
       pack();
    }// </editor-fold>//GEN-END:initComponents
@@ -515,6 +565,8 @@ public class QueryFrame extends javax.swing.JFrame
    private javax.swing.JTextField jTextField8;
    private javax.swing.JTextField jTextField9;
    // End of variables declaration//GEN-END:variables
+   private javax.swing.JLabel jLabelQueries;
+   private javax.swing.JLabel jLabelQueryDetails;
 
    private final JLabel[] m_parmlabels;
    private JTextField[] m_textvals;
