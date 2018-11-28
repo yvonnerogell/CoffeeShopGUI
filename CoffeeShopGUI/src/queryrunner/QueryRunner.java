@@ -109,7 +109,17 @@ public class QueryRunner
             "COFFEE_FARMER.VENDOR_ID = VENDOR_LIST.VENDOR_ID ORDER BY " +
             "YIELD_PER_ACRE DESC";
 
+      String totalSalesDesc = "Total sales by menu item";
+      
+      String totalSalesQuery = "SELECT MENU_ITEM_DESC,ROUND(SUM(TRANS_LINE_ITEM_UNIT_QTY * "
+      			+ "MENU_ITEM_RETAIL_PRICE),2) AS TOTAL_SALES, SUM(TRANS_LINE_ITEM_UNIT_QTY) AS TOTAL_UNITS"
+      			+ " FROM CUSTOMER_TRANSACTION C INNER JOIN CUSTOMER_TRANSACTION_LINE_ITEM T "
+      			+ "ON C.CUST_TRANS_ID = T.CUST_TRANS_ID INNER JOIN MENU_ITEM M ON T.MENU_ITEM_ID = "
+      			+ "M.MENU_ITEM_ID WHERE C.CUST_TRANS_DATE_TIME BETWEEN ? AND ? GROUP BY"
+      			+ " MENU_ITEM_DESC WITH ROLLUP";
 
+      
+      
       // You will need to put your Project Application in the below variable
 
       this.m_projectTeamApplication = "No Dozin' Coffee Roasters"; // THIS
@@ -151,19 +161,15 @@ public class QueryRunner
 
       m_queryArray.add(new QueryData(farmerCertDesc, farmerCertQuery, null, null, false, false));
       m_queryArray.add(new QueryData(farmerProdDesc, farmerProdQuery, null, null, false, false));
+      
+      m_queryArray.add(new QueryData(totalSalesDesc, totalSalesQuery, 
+      			new String [] {"START_DATE", "END_DATE"}, new boolean [] {false, false}, false, true));
+
+
+      // new SimpleDateFormat(“yyyy-MM-dd”) {“START_DATE”}, new SimpleDateFormat(“yyyy-mm-dd”) {“END_DATE”}, 
 
      
-      // m_queryArray.add(new QueryData("Select * from contact where
-      // contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},
-      // false, true)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-      // m_queryArray.add(new QueryData("Select * from contact where
-      // contact_name like ?", new String [] {"CONTACT_NAME"}, new boolean []
-      // {true}, false, true)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-      // m_queryArray.add(new QueryData("insert into contact (contact_id,
-      // contact_name, contact_salary) values (?,?,?)",new String []
-      // {"CONTACT_ID", "CONTACT_NAME", "CONTACT_SALARY"}, new boolean []
-      // {false, false, false}, true, true));// THIS NEEDS TO CHANGE FOR YOUR
-      // APPLICATION
+   
 
    }
 
