@@ -141,16 +141,11 @@ public class QueryRunner
             null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
       m_queryArray.add(new QueryData(equipServiceDesc, equipServiceQuery, null,
             null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-
       m_queryArray.add(new QueryData(storeContactQueryDesc, storeContactQuery, 
     		  null, null, false, false));
-      
       m_queryArray.add(new QueryData(recipeQueryDesc, recipeQuery, null, 
     		  null, false, false));
-
       m_queryArray.add(new QueryData(profitabilityDesc, profitabilityQuery, null, null, false, false));
-      
-
       m_queryArray.add(new QueryData(farmerCertDesc, farmerCertQuery, null, null, false, false));
       m_queryArray.add(new QueryData(farmerProdDesc, farmerProdQuery, null, null, false, false));
       
@@ -160,8 +155,18 @@ public class QueryRunner
 
       // new SimpleDateFormat(“yyyy-MM-dd”) {“START_DATE”}, new SimpleDateFormat(“yyyy-mm-dd”) {“END_DATE”}, 
 
-     
-   
+      // m_queryArray.add(new QueryData("Select * from contact where
+      // contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},
+      // false, true)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+      // m_queryArray.add(new QueryData("Select * from contact where
+      // contact_name like ?", new String [] {"CONTACT_NAME"}, new boolean []
+      // {true}, false, true)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+      // m_queryArray.add(new QueryData("insert into contact (contact_id,
+      // contact_name, contact_salary) values (?,?,?)",new String []
+      // {"CONTACT_ID", "CONTACT_NAME", "CONTACT_SALARY"}, new boolean []
+      // {false, false, false}, true, true));// THIS NEEDS TO CHANGE FOR YOUR
+      // APPLICATION
+
 
    }
 
