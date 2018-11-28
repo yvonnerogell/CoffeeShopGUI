@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -86,12 +87,12 @@ public class QueryRunner
       String farmerCertDesc = "All farmers and their certifications.";
       
       String farmerCertQuery = "SELECT v.VENDOR_COMPANY_NAME, cf.FARMER_CERT_DATE, c.CERT_DESC" +
-            " FROM coffee_farmer_has_certification cf, vendor_list v, certification c " +
+            " FROM COFFEE_FARMER_has_CERTIFICATION cf, VENDOR_LIST v, CERTIFICATION c " +
             "WHERE v.vendor_id = cf.vendor_id AND cf.cert_id = c.cert_id " +
             "ORDER BY v.vendor_company_name";
       
       
-      String farmerProdDesc = "Calculating each farmer’s productivity (yield/acre)";
+      String farmerProdDesc = "Calculating each farmerâ€™s productivity (yield/acre)";
       String farmerProdQuery = "SELECT COFFEE_FARMER.VENDOR_ID, " +
             "VENDOR_LIST.VENDOR_COMPANY_NAME, VENDOR_LIST.VENDOR_ADDRESS_COUNTRY, " +
             "COFFEE_FARMER.COFFEE_FARMER_ANNUAL_YIELD / COFFEE_FARMER.COFFEE_FARMER_ACREAGE " +
@@ -174,20 +175,6 @@ public class QueryRunner
       "STREET_NAME", "CITY", "STATE", "ZIP", "MANAGER_PAY", "PROMOTED_EMP_ID"}, new boolean [] {false, false, false, false, false, false, false, false}, true, true));
       
 
-
-      // new SimpleDateFormat(“yyyy-MM-dd”) {“START_DATE”}, new SimpleDateFormat(“yyyy-mm-dd”) {“END_DATE”}, 
-
-      // m_queryArray.add(new QueryData("Select * from contact where
-      // contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},
-      // false, true)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-      // m_queryArray.add(new QueryData("Select * from contact where
-      // contact_name like ?", new String [] {"CONTACT_NAME"}, new boolean []
-      // {true}, false, true)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-      // m_queryArray.add(new QueryData("insert into contact (contact_id,
-      // contact_name, contact_salary) values (?,?,?)",new String []
-      // {"CONTACT_ID", "CONTACT_NAME", "CONTACT_SALARY"}, new boolean []
-      // {false, false, false}, true, true));// THIS NEEDS TO CHANGE FOR YOUR
-      // APPLICATION
 
 
    }
@@ -330,12 +317,14 @@ public class QueryRunner
    // It will run a single select query without Parameters
    // It will display the results
    // It will close the database session
+   
+   // Emily here! The following still needs some work, but I think it's a solid
+   // start and mostly just needs to print all the queries out...hard to say if 
+   // they're working without that (but parameters worked!)
 
    public static void main(String[] args)
    {
-      
-     
-      // TODO code application logic here
+
 
       final QueryRunner queryrunner = new QueryRunner();
 
@@ -352,7 +341,7 @@ public class QueryRunner
       }
       else
       {
-         if (args[0] == "-console")
+         if (args[0].equals("-console"))
          {
             // TODO
             // You should code the following functionality:
@@ -402,14 +391,120 @@ public class QueryRunner
             // QueryFrame.java for assistance. You should not have to
             // alter any code in QueryJDBC, QueryData, or QueryFrame to make
             // this work.
-            System.out.println("Please write the non-gui functionality");
+            
+            boolean repeat;
+            Scanner keyboard = new Scanner(System.in);
+            do
+            {    
+               repeat = false; 
+               
+               // Get database login credentials from the user
+               String hostname, username, password, database; 
+               System.out.print("Enter Hostname: "); 
+               hostname = keyboard.nextLine();
+               System.out.print("Enter Username: ");
+               username = keyboard.nextLine();
+               System.out.print("Enter Password: ");
+               password = keyboard.nextLine(); 
+               System.out.print("Enter Database: ");
+               database = keyboard.nextLine(); 
+            
+               // Use login credentials to connect to the database
+               boolean connected = queryrunner.Connect(hostname, username, 
+                     password, database);
+               
+               // Print a message to indicate whether login was successful
+               if (connected)
+               {
+                  System.out.println("Connected to the database.");
+                  System.out.println();
+               }  
+               
+               // If login fails, allow user to try again
+               else
+               {
+                  System.out.println("Login failed. Not connected to the database. "
+                        + "Would you like to try again? (y/n) "); 
+                  if (keyboard.nextLine().toLowerCase().charAt(0) == 'y')
+                     repeat = true; 
+               }
+            } while (repeat);
+            
+            // Get the number of queries
+            int numQueries = queryrunner.GetTotalQueries();
+            
+            // Cycle through each query and execute it
+            for (int i = 0; i < numQueries; i++)
+            {
+               // Determine if the query has parameters
+               int numParams = queryrunner.m_queryArray.get(i).GetParmAmount();
+               String[] parameters = new String[numParams];
+               
+               // Get the parameters from the user
+               // Recommended dates for most interesting results: 
+               // START_DATE: 2018-11-01
+               // END_DATE: 2018-11-15
+               if (numParams > 0)
+               {
+                  for (int j = 0; j < parameters.length; j++)
+                  {
+                     String paramLabel = queryrunner.GetParamText(i, j);
+                     System.out.print(paramLabel + ": ");
+                     String input = keyboard.nextLine();
+                     parameters[j] = input; 
+                  }                
+                  
+               }     
+               
+               // Determine if the query is an action query and run it
+               if (queryrunner.isActionQuery(i))
+               {
+                  queryrunner.ExecuteUpdate(i, parameters);
+                  int numUpdated = queryrunner.GetUpdateAmount();
+                  System.out.println(numUpdated + "rows were affected.");
+               }
+               
+               // If query isn't an action query, run it 
+               else
+               {
+                  queryrunner.ExecuteQuery(i, parameters);
+               }
+               
+               // Get the headers for each query and print to console
+               String[] headers = queryrunner.GetQueryHeaders();
+               for (int k = 0; k < headers.length; k++)
+               {
+                  System.out.printf("%-40s ", headers[k]);
+               }
+               System.out.println(); 
+              
+               // Get the data for each query and print to console
+               String[][] data = queryrunner.GetQueryData();
+               for (int m = 0; m < data.length; m++)
+               {
+                  for (int n = 0; n < data[m].length; n++)
+                  {
+                     System.out.printf("%-40s ", data[m][n]);
+                  }
+                  System.out.println();
+               }
+               System.out.println();
+            }
+            
+            // Disconnect from the database
+            boolean disconnected = queryrunner.Disconnect();
+            if (disconnected)
+               System.out.println("Disconnected from the database.");
+            else
+               System.out.println("ERROR: Failed to disconnect from the "
+                     + "database.");             
          }
          else
          {
-            System.out.println(
-                  "usage: you must use -console as your argument to get non-gui functionality. If you leave it out it will be GUI");
+            System.out.println("usage: you must use -console as your argument "
+                  + "to get non-gui functionality. If you leave it out it will"
+                  + " be GUI");
          }
       }
-
    }
 }
