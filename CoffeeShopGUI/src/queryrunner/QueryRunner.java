@@ -306,9 +306,6 @@ public class QueryRunner
 
    public static void main(String[] args)
    {
-      
-     
-      // TODO code application logic here
 
       final QueryRunner queryrunner = new QueryRunner();
 
