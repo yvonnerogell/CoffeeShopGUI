@@ -24,6 +24,7 @@ public class QueryJDBC
 {
 
    public Connection m_conn = null;
+   //static final String DB_DRV = "jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
    static final String DB_DRV = "com.mysql.jdbc.Driver";
    
    // jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC

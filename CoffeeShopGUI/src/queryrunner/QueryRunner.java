@@ -154,20 +154,6 @@ public class QueryRunner
       			new String [] {"START_DATE", "END_DATE"}, new boolean [] {false, false}, false, true));
 
 
-      // new SimpleDateFormat(â€œyyyy-MM-ddâ€�) {â€œSTART_DATEâ€�}, new SimpleDateFormat(â€œyyyy-mm-ddâ€�) {â€œEND_DATEâ€�}, 
-
-      // m_queryArray.add(new QueryData("Select * from contact where
-      // contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},
-      // false, true)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-      // m_queryArray.add(new QueryData("Select * from contact where
-      // contact_name like ?", new String [] {"CONTACT_NAME"}, new boolean []
-      // {true}, false, true)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-      // m_queryArray.add(new QueryData("insert into contact (contact_id,
-      // contact_name, contact_salary) values (?,?,?)",new String []
-      // {"CONTACT_ID", "CONTACT_NAME", "CONTACT_SALARY"}, new boolean []
-      // {false, false, false}, true, true));// THIS NEEDS TO CHANGE FOR YOUR
-      // APPLICATION
-
 
    }
 
@@ -316,7 +302,7 @@ public class QueryRunner
 
    public static void main(String[] args)
    {
-      
+
 
       final QueryRunner queryrunner = new QueryRunner();
 
