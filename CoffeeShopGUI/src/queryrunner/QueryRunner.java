@@ -384,24 +384,35 @@ public class QueryRunner
             // alter any code in QueryJDBC, QueryData, or QueryFrame to make
             // this work.
             
-            boolean repeat = false;
+            boolean repeat;
             Scanner keyboard = new Scanner(System.in);
             do
-            {
+            {    
+               repeat = false; 
                
-//            String hostname, username, password, database; 
-//            System.out.print("Enter the Hostname: "); 
-//            hostname = keyboard.nextLine();
-//            System.out.println("Enter the Username: ");
-//            username = keyboard.nextLine();
-//            System.out.println("Enter the Password: ");
-//            password = keyboard.nextLine(); 
-//            System.out.println("Enter the Database: ");
-//            database = keyboard.nextLine(); 
+               // Get database login credentials from the user
+               String hostname, username, password, database; 
+               System.out.print("Enter Hostname: "); 
+               hostname = keyboard.nextLine();
+               System.out.print("Enter Username: ");
+               username = keyboard.nextLine();
+               System.out.print("Enter Password: ");
+               password = keyboard.nextLine(); 
+               System.out.print("Enter Database: ");
+               database = keyboard.nextLine(); 
             
-               boolean connected = queryrunner.Connect("localhost", "root", "password", "mm_sttest3b");
+               // Use login credentials to connect to the database
+               boolean connected = queryrunner.Connect(hostname, username, 
+                     password, database);
+               
+               // Print a message to indicate whether login was successful
                if (connected)
+               {
                   System.out.println("Connected to the database.");
+                  System.out.println();
+               }  
+               
+               // If login fails, allow user to try again
                else
                {
                   System.out.println("Login failed. Not connected to the database. "
@@ -411,24 +422,33 @@ public class QueryRunner
                }
             } while (repeat);
             
-  
+            // Get the number of queries
             int numQueries = queryrunner.GetTotalQueries();
             
+            // Cycle through each query and execute it
             for (int i = 0; i < numQueries; i++)
             {
+               // Determine if the query has parameters
                int numParams = queryrunner.m_queryArray.get(i).GetParmAmount();
                String[] parameters = new String[numParams];
+               
+               // Get the parameters from the user
+               // Recommended dates for most interesting results: 
+               // START_DATE: 2018-11-01
+               // END_DATE: 2018-11-15
                if (numParams > 0)
                {
                   for (int j = 0; j < parameters.length; j++)
                   {
                      String paramLabel = queryrunner.GetParamText(i, j);
-                     System.out.println(paramLabel + ": ");
+                     System.out.print(paramLabel + ": ");
                      String input = keyboard.nextLine();
                      parameters[j] = input; 
                   }                
                   
-               }                            
+               }     
+               
+               // Determine if the query is an action query and run it
                if (queryrunner.isActionQuery(i))
                {
                   queryrunner.ExecuteUpdate(i, parameters);
@@ -436,19 +456,46 @@ public class QueryRunner
                   System.out.println(numUpdated + "rows were affected.");
                }
                
+               // If query isn't an action query, run it 
                else
                {
                   queryrunner.ExecuteQuery(i, parameters);
                }
+               
+               // Get the headers for each query and print to console
+               String[] headers = queryrunner.GetQueryHeaders();
+               for (int k = 0; k < headers.length; k++)
+               {
+                  System.out.printf("%-40s ", headers[k]);
+               }
+               System.out.println(); 
               
+               // Get the data for each query and print to console
+               String[][] data = queryrunner.GetQueryData();
+               for (int m = 0; m < data.length; m++)
+               {
+                  for (int n = 0; n < data[m].length; n++)
+                  {
+                     System.out.printf("%-40s ", data[m][n]);
+                  }
+                  System.out.println();
+               }
+               System.out.println();
             }
             
-            System.out.println("Please write the non-gui functionality");
+            // Disconnect from the database
+            boolean disconnected = queryrunner.Disconnect();
+            if (disconnected)
+               System.out.println("Disconnected from the database.");
+            else
+               System.out.println("ERROR: Failed to disconnect from the "
+                     + "database.");             
          }
          else
          {
-            System.out.println(
-                  "usage: you must use -console as your argument to get non-gui functionality. If you leave it out it will be GUI");
+            System.out.println("usage: you must use -console as your argument "
+                  + "to get non-gui functionality. If you leave it out it will"
+                  + " be GUI");
          }
       }
    }
