@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -91,7 +92,7 @@ public class QueryRunner
             "ORDER BY v.vendor_company_name";
       
       
-      String farmerProdDesc = "Calculating each farmer’s productivity (yield/acre)";
+      String farmerProdDesc = "Calculating each farmerâ€™s productivity (yield/acre)";
       String farmerProdQuery = "SELECT COFFEE_FARMER.VENDOR_ID, " +
             "VENDOR_LIST.VENDOR_COMPANY_NAME, VENDOR_LIST.VENDOR_ADDRESS_COUNTRY, " +
             "COFFEE_FARMER.COFFEE_FARMER_ANNUAL_YIELD / COFFEE_FARMER.COFFEE_FARMER_ACREAGE " +
@@ -153,7 +154,7 @@ public class QueryRunner
       			new String [] {"START_DATE", "END_DATE"}, new boolean [] {false, false}, false, true));
 
 
-      // new SimpleDateFormat(“yyyy-MM-dd”) {“START_DATE”}, new SimpleDateFormat(“yyyy-mm-dd”) {“END_DATE”}, 
+      // new SimpleDateFormat(â€œyyyy-MM-ddâ€�) {â€œSTART_DATEâ€�}, new SimpleDateFormat(â€œyyyy-mm-ddâ€�) {â€œEND_DATEâ€�}, 
 
       // m_queryArray.add(new QueryData("Select * from contact where
       // contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},
@@ -308,12 +309,14 @@ public class QueryRunner
    // It will run a single select query without Parameters
    // It will display the results
    // It will close the database session
+   
+   // Emily here! The following still needs some work, but I think it's a solid
+   // start and mostly just needs to print all the queries out...hard to say if 
+   // they're working without that (but parameters worked!)
 
    public static void main(String[] args)
    {
       
-     
-      // TODO code application logic here
 
       final QueryRunner queryrunner = new QueryRunner();
 
@@ -330,7 +333,7 @@ public class QueryRunner
       }
       else
       {
-         if (args[0] == "-console")
+         if (args[0].equals("-console"))
          {
             // TODO
             // You should code the following functionality:
@@ -380,6 +383,66 @@ public class QueryRunner
             // QueryFrame.java for assistance. You should not have to
             // alter any code in QueryJDBC, QueryData, or QueryFrame to make
             // this work.
+            
+            boolean repeat = false;
+            Scanner keyboard = new Scanner(System.in);
+            do
+            {
+               
+//            String hostname, username, password, database; 
+//            System.out.print("Enter the Hostname: "); 
+//            hostname = keyboard.nextLine();
+//            System.out.println("Enter the Username: ");
+//            username = keyboard.nextLine();
+//            System.out.println("Enter the Password: ");
+//            password = keyboard.nextLine(); 
+//            System.out.println("Enter the Database: ");
+//            database = keyboard.nextLine(); 
+            
+               boolean connected = queryrunner.Connect("localhost", "root", "password", "mm_sttest3b");
+               if (connected)
+                  System.out.println("Connected to the database.");
+               else
+               {
+                  System.out.println("Login failed. Not connected to the database. "
+                        + "Would you like to try again? (y/n) "); 
+                  if (keyboard.nextLine().toLowerCase().charAt(0) == 'y')
+                     repeat = true; 
+               }
+            } while (repeat);
+            
+  
+            int numQueries = queryrunner.GetTotalQueries();
+            
+            for (int i = 0; i < numQueries; i++)
+            {
+               int numParams = queryrunner.m_queryArray.get(i).GetParmAmount();
+               String[] parameters = new String[numParams];
+               if (numParams > 0)
+               {
+                  for (int j = 0; j < parameters.length; j++)
+                  {
+                     String paramLabel = queryrunner.GetParamText(i, j);
+                     System.out.println(paramLabel + ": ");
+                     String input = keyboard.nextLine();
+                     parameters[j] = input; 
+                  }                
+                  
+               }                            
+               if (queryrunner.isActionQuery(i))
+               {
+                  queryrunner.ExecuteUpdate(i, parameters);
+                  int numUpdated = queryrunner.GetUpdateAmount();
+                  System.out.println(numUpdated + "rows were affected.");
+               }
+               
+               else
+               {
+                  queryrunner.ExecuteQuery(i, parameters);
+               }
+              
+            }
+            
             System.out.println("Please write the non-gui functionality");
          }
          else
@@ -388,6 +451,5 @@ public class QueryRunner
                   "usage: you must use -console as your argument to get non-gui functionality. If you leave it out it will be GUI");
          }
       }
-
    }
 }
