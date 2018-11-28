@@ -26,6 +26,8 @@ public class QueryJDBC
    public Connection m_conn = null;
    //static final String DB_DRV = "jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
    static final String DB_DRV = "com.mysql.jdbc.Driver";
+   
+   // jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
    String m_error = "";
    String m_url;
    String m_user;
@@ -194,11 +196,14 @@ public class QueryJDBC
          String database)
    {
       String url;
+      
+      //cssql.seattleu.edu:3306/mm_sttest6b?useLegacyDatetimeCode=false&serverTimezone=America/Los_Angeles
 
       url = "jdbc:mysql://";
       url += host;
       url += ":3306/";
       url += database;
+      url += "?useLegacyDatetimeCode=false&serverTimezone=America/Los_Angeles";
       try
       {
 
