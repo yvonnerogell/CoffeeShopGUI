@@ -125,7 +125,7 @@ public class QueryRunner
       		"COMMIT;";
       
       
-      String addStoreDesc = "SOMETHING";
+      String addStoreDesc = "Open a new store and promote an existing employee from another store to manager of the new store";
 
       
       

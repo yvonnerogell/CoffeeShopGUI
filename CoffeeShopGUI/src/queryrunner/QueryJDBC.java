@@ -203,7 +203,7 @@ public class QueryJDBC
       url += host;
       url += ":3306/";
       url += database;
-      url += "?useLegacyDatetimeCode=false&serverTimezone=America/Los_Angeles";
+      url += "?allowMultiQueries=true&useLegacyDatetimeCode=false&serverTimezone=America/Los_Angeles";
       try
       {
 
