@@ -23,9 +23,10 @@ public class QueryData
 //        m_queryString = query;
 //    }
 
-   QueryData(String desc, String query, String[] parms, boolean[] likeparms,
+   QueryData(String buttonText, String desc, String query, String[] parms, boolean[] likeparms,
          boolean isAction, boolean isParm)
    {
+      m_queryButtonText = buttonText;
       m_queryDesc = desc;
       m_queryString = query;
       m_arrayParms = parms;
@@ -41,6 +42,11 @@ public class QueryData
 //        m_isAction = isAction;
 //        m_isParms = isParm;
 //    }
+   
+   String getQueryButtonText()
+   {
+      return m_queryButtonText;
+   }
 
    String getQueryDesc()
    {
@@ -85,6 +91,7 @@ public class QueryData
       return m_isParms;
    }
 
+   private String m_queryButtonText;
    private String m_queryString;
    private String m_queryDesc;
    private String[] m_arrayParms;

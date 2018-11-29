@@ -62,8 +62,17 @@ public class QueryFrame extends javax.swing.JFrame
 
       for (int i = 0; i < nAmt; i++)
       {
+         this.jComboBox1.addItem(m_queryrunner.getQueryButtonText(i));
+      }
+      
+      
+      /*
+      for (int i = 0; i < nAmt; i++)
+      {
          this.jComboBox1.addItem("Query " + (i + 1));
       }
+      
+      */
       jComboBox1.setEnabled(false);
       jButton2.setEnabled(false);
 
@@ -102,12 +111,13 @@ public class QueryFrame extends javax.swing.JFrame
       jLabel11 = new javax.swing.JLabel();
       jLabel12 = new javax.swing.JLabel();
       
+      /*
       jLabelQueries = new javax.swing.JLabel();
       jLabelQueries.setHorizontalAlignment(SwingConstants.CENTER);
       jLabelQueries.setVerticalAlignment(SwingConstants.TOP);
-      jLabelQueries.setBackground(SystemColor.window);
-      jLabelQueryDetails = new javax.swing.JLabel();
-      jLabelQueryDetails.setVerticalAlignment(SwingConstants.TOP);
+      jLabelQueries.setBackground(SystemColor.window); */
+   //   jLabelQueryDetails = new javax.swing.JLabel();
+     // jLabelQueryDetails.setVerticalAlignment(SwingConstants.TOP);
       jTextField9 = new javax.swing.JTextField();
       jTextField10 = new javax.swing.JTextField();
       jTextField11 = new javax.swing.JTextField();
@@ -335,15 +345,16 @@ public class QueryFrame extends javax.swing.JFrame
             new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 1000,
                   180));
       
-      jLabelQueryDetails.setFont(new Font("Helvetica", Font.BOLD, 12)); // NOI18N
-      jLabelQueryDetails.setText("Query 1: List of vendors");
+  //    jLabelQueryDetails.setFont(new Font("Helvetica", Font.BOLD, 12)); // NOI18N
+    //  jLabelQueryDetails.setText("Query 1: List of vendors");
      // jLabelQueryDetails.setOpaque(true);
       
+      /*
       getContentPane().add(jLabelQueryDetails,
             new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 40, 180,
-                  550));
+                  550)); */
       
-      
+      /*
       jLabelQueries.setFont(new Font("Adobe Gothic Std", Font.BOLD, 22)); // NOI18N
       jLabelQueries.setText("Query Details");
       jLabelQueries.setOpaque(true);
@@ -351,7 +362,7 @@ public class QueryFrame extends javax.swing.JFrame
       getContentPane().add(jLabelQueries,
             new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 10, 200,
                   600));
-      
+      */
       
       //getContentPane().add(jLabel14,
        //     new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 280,
@@ -418,7 +429,8 @@ public class QueryFrame extends javax.swing.JFrame
 
       jTextArea2.setText("");
       String szChoice = (String) jComboBox1.getSelectedItem();
-      String szStripChoice = szChoice.substring(6);
+      String szStripChoice = szChoice.substring(0,1);
+      szChoice = szChoice.substring(2);
       m_queryChoice = Integer.parseInt(szStripChoice) - 1;
       String szQuery = m_queryrunner.GetQueryText(m_queryChoice);
       String queryDesc = m_queryrunner.getQueryDesc(m_queryChoice);
@@ -565,8 +577,8 @@ public class QueryFrame extends javax.swing.JFrame
    private javax.swing.JTextField jTextField8;
    private javax.swing.JTextField jTextField9;
    // End of variables declaration//GEN-END:variables
-   private javax.swing.JLabel jLabelQueries;
-   private javax.swing.JLabel jLabelQueryDetails;
+ //  private javax.swing.JLabel jLabelQueries;
+  // private javax.swing.JLabel jLabelQueryDetails;
 
    private final JLabel[] m_parmlabels;
    private JTextField[] m_textvals;

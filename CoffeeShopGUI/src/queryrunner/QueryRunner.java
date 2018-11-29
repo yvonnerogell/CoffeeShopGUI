@@ -156,23 +156,33 @@ public class QueryRunner
       // parameters that don't use 'like' and true for ones that do.
       // IsItActionQuery (e.g. Mark it true if it is, otherwise false)
       // IsItParameterQuery (e.g.Mark it true if it is, otherwise false)
+      
+      String vendorButton = "1 Vendor";
+      String equipmentButton = "2 Equipment";
+      String recipeButton = "3 Recipe";
+      String profitButton = "4 Profit";
+      String storeButton = "5 Store";
+      String farmerCertButton = "6 Farmer Cert";
+      String farmerProdButton = "7 Productivity";
+      String salesButton = "8 Sales";
+      String addStoreButton = "9 Add store";
 
-      m_queryArray.add(new QueryData(vendorListDesc, vendorListQuery, null,
+      m_queryArray.add(new QueryData(vendorButton, vendorListDesc, vendorListQuery, null,
             null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-      m_queryArray.add(new QueryData(equipServiceDesc, equipServiceQuery, null,
+      m_queryArray.add(new QueryData(equipmentButton, equipServiceDesc, equipServiceQuery, null,
             null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-      m_queryArray.add(new QueryData(recipeQueryDesc, recipeQuery, null, null, false, false));
-      m_queryArray.add(new QueryData(profitabilityDesc, profitabilityQuery, null, null, false, false));
-      m_queryArray.add(new QueryData(storeContactQueryDesc, storeContactQuery, 
+      m_queryArray.add(new QueryData(recipeButton, recipeQueryDesc, recipeQuery, null, null, false, false));
+      m_queryArray.add(new QueryData(profitButton, profitabilityDesc, profitabilityQuery, null, null, false, false));
+      m_queryArray.add(new QueryData(storeButton, storeContactQueryDesc, storeContactQuery, 
     		  null, null, false, false));
 
-      m_queryArray.add(new QueryData(farmerCertDesc, farmerCertQuery, null, null, false, false));
-      m_queryArray.add(new QueryData(farmerProdDesc, farmerProdQuery, null, null, false, false));
+      m_queryArray.add(new QueryData(farmerCertButton, farmerCertDesc, farmerCertQuery, null, null, false, false));
+      m_queryArray.add(new QueryData(farmerProdButton, farmerProdDesc, farmerProdQuery, null, null, false, false));
       
-      m_queryArray.add(new QueryData(totalSalesDesc, totalSalesQuery, 
+      m_queryArray.add(new QueryData(salesButton, totalSalesDesc, totalSalesQuery, 
       			new String [] {"START_DATE", "END_DATE"}, new boolean [] {false, false}, false, true));
       
-      m_queryArray.add(new QueryData(addStoreDesc, addStore, new String[] {"PHONE", "STREET_NUM", 
+      m_queryArray.add(new QueryData(addStoreButton, addStoreDesc, addStore, new String[] {"PHONE", "STREET_NUM", 
       "STREET_NAME", "CITY", "STATE", "ZIP", "MANAGER_PAY", "PROMOTED_EMP_ID"}, new boolean [] {false, false, false, false, false, false, false, false}, true, true));
       
 
@@ -197,6 +207,12 @@ public class QueryRunner
    public int GetTotalQueries()
    {
       return m_queryArray.size();
+   }
+   
+   public String getQueryButtonText(int queryChoice)
+   {
+      QueryData e = m_queryArray.get(queryChoice);
+      return e.getQueryButtonText();
    }
 
    public int GetParameterAmtForQuery(int queryChoice)
