@@ -29,6 +29,15 @@ public class QueryRunner {
 		m_updateAmount = 0;
 		m_queryArray = new ArrayList<>();
 		m_error = "";
+		
+		String helloDesc = "Welcome to the No Dozin' Database!\n\nPlease " +
+            "log in.\n " +
+            "  .-~~-.\n" +
+            ",|`-__- '|\n" +
+            "||           |\n" +
+            "`|          |\n" +
+            "  `-__- '";
+      String helloQuery = "SELECT * FROM STORE";
 
 		String vendorListDesc = "List of vendors ordered by oldest to newest, "
 				+ "incl. column with years as vendor.";
@@ -122,6 +131,7 @@ public class QueryRunner {
 		// IsItActionQuery (e.g. Mark it true if it is, otherwise false)
 		// IsItParameterQuery (e.g.Mark it true if it is, otherwise false)
 
+		String helloButton = "0 Choose query";
 		String vendorButton = "1 Vendor";
 		String equipmentButton = "2 Equipment";
 		String recipeButton = "3 Recipe";
@@ -130,8 +140,10 @@ public class QueryRunner {
 		String farmerCertButton = "6 Farmer Cert";
 		String farmerProdButton = "7 Productivity";
 		String salesButton = "8 Sales";
-		String addStoreButton = "9 Add store";
-
+		String addStoreButton = "9 Add store"; 
+		
+		m_queryArray.add(new QueryData(helloButton, helloDesc, helloQuery, null,
+            null, false, false));
 		m_queryArray.add(new QueryData(vendorButton, vendorListDesc,
 				vendorListQuery, null, null, false, false));
 		m_queryArray.add(new QueryData(equipmentButton, equipServiceDesc,
