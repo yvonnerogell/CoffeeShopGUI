@@ -492,35 +492,37 @@ public class QueryRunner
                   queryrunner.ExecuteUpdate(i, parameters);
                   int numUpdated = queryrunner.GetUpdateAmount();
                   System.out.println(numUpdated + "rows were affected.");
+                  
                }
                
                // If query isn't an action query, run it 
                else
                {
                   queryrunner.ExecuteQuery(i, parameters);
-               }
-               
-               // Get the headers for each query and print to console
-               String[] headers = queryrunner.GetQueryHeaders();
-               for (int k = 0; k < headers.length; k++)
-               {
-                  System.out.printf("%-40s ", headers[k]);
-               }
-               System.out.println(); 
-              
-               // Get the data for each query and print to console
-               String[][] data = queryrunner.GetQueryData();
-               for (int m = 0; m < data.length; m++)
-               {
-                  for (int n = 0; n < data[m].length; n++)
+                  
+                  // Get the headers for each query and print to console
+                  String[] headers = queryrunner.GetQueryHeaders();
+                  for (int k = 0; k < headers.length; k++)
                   {
-                     System.out.printf("%-40s ", data[m][n]);
+                     System.out.printf("%-40s ", headers[k]);
+                  }
+                  System.out.println(); 
+                 
+                  // Get the data for each query and print to console
+                  String[][] data = queryrunner.GetQueryData();
+                  for (int m = 0; m < data.length; m++)
+                  {
+                     for (int n = 0; n < data[m].length; n++)
+                     {
+                        System.out.printf("%-40s ", data[m][n]);
+                     }
+                     System.out.println();
                   }
                   System.out.println();
+
                }
-               System.out.println();
+               
             }
-            
             // Disconnect from the database
             boolean disconnected = queryrunner.Disconnect();
             if (disconnected)
