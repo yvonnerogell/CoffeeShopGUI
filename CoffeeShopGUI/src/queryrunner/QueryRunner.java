@@ -83,7 +83,6 @@ public class QueryRunner
       			+ "COMPONENT_PRODUCT C ON MC.COMP_PROD_ID = C.COMP_PROD_ID GROUP BY MENU_ITEM_DESC "
       			+ "ORDER BY MARKUP_PERCENTAGE DESC"; 
 
-
       String farmerCertDesc = "All farmers and their certifications.";
       
       String farmerCertQuery = "SELECT v.VENDOR_COMPANY_NAME, cf.FARMER_CERT_DATE, c.CERT_DESC" +
@@ -157,32 +156,63 @@ public class QueryRunner
       // IsItActionQuery (e.g. Mark it true if it is, otherwise false)
       // IsItParameterQuery (e.g.Mark it true if it is, otherwise false)
 
-      m_queryArray.add(new QueryData(vendorListDesc, vendorListQuery, null,
-            null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-      m_queryArray.add(new QueryData(equipServiceDesc, equipServiceQuery, null,
-            null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
-      m_queryArray.add(new QueryData(storeContactQueryDesc, storeContactQuery, 
-    		  null, null, false, false));
-      m_queryArray.add(new QueryData(recipeQueryDesc, recipeQuery, null, 
-    		  null, false, false));
-      m_queryArray.add(new QueryData(profitabilityDesc, profitabilityQuery, null, null, false, false));
-      m_queryArray.add(new QueryData(farmerCertDesc, farmerCertQuery, null, null, false, false));
-      m_queryArray.add(new QueryData(farmerProdDesc, farmerProdQuery, null, null, false, false));
       
-      m_queryArray.add(new QueryData(totalSalesDesc, totalSalesQuery, 
+      String vendorButton = "1 Vendor";
+      String equipmentButton = "2 Equipment";
+      String recipeButton = "3 Recipe";
+      String profitButton = "4 Profit";
+      String storeButton = "5 Store";
+      String farmerCertButton = "6 Farmer Cert";
+      String farmerProdButton = "7 Productivity";
+      String salesButton = "8 Sales";
+      String addStoreButton = "9 Add store";
+
+      m_queryArray.add(new QueryData(vendorButton, vendorListDesc, vendorListQuery, null,
+            null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+      m_queryArray.add(new QueryData(equipmentButton, equipServiceDesc, equipServiceQuery, null,
+            null, false, false)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+      m_queryArray.add(new QueryData(recipeButton, recipeQueryDesc, recipeQuery, null, null, false, false));
+      m_queryArray.add(new QueryData(profitButton, profitabilityDesc, profitabilityQuery, null, null, false, false));
+      m_queryArray.add(new QueryData(storeButton, storeContactQueryDesc, storeContactQuery, 
+    		  null, null, false, false));
+
+      m_queryArray.add(new QueryData(farmerCertButton, farmerCertDesc, farmerCertQuery, null, null, false, false));
+      m_queryArray.add(new QueryData(farmerProdButton, farmerProdDesc, farmerProdQuery, null, null, false, false));
+      
+      m_queryArray.add(new QueryData(salesButton, totalSalesDesc, totalSalesQuery, 
       			new String [] {"START_DATE", "END_DATE"}, new boolean [] {false, false}, false, true));
       
-      m_queryArray.add(new QueryData(addStoreDesc, addStore, new String[] {"PHONE", "STREET_NUM", 
+      m_queryArray.add(new QueryData(addStoreButton, addStoreDesc, addStore, new String[] {"PHONE", "STREET_NUM", 
       "STREET_NAME", "CITY", "STATE", "ZIP", "MANAGER_PAY", "PROMOTED_EMP_ID"}, new boolean [] {false, false, false, false, false, false, false, false}, true, true));
       
 
 
+      // new SimpleDateFormat(â€œyyyy-MM-ddâ€�) {â€œSTART_DATEâ€�}, new SimpleDateFormat(â€œyyyy-mm-ddâ€�) {â€œEND_DATEâ€�}, 
+
+
+      // m_queryArray.add(new QueryData("Select * from contact where
+      // contact_id=?", new String [] {"CONTACT_ID"}, new boolean [] {false},
+      // false, true)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+      // m_queryArray.add(new QueryData("Select * from contact where
+      // contact_name like ?", new String [] {"CONTACT_NAME"}, new boolean []
+      // {true}, false, true)); // THIS NEEDS TO CHANGE FOR YOUR APPLICATION
+      // m_queryArray.add(new QueryData("insert into contact (contact_id,
+      // contact_name, contact_salary) values (?,?,?)",new String []
+      // {"CONTACT_ID", "CONTACT_NAME", "CONTACT_SALARY"}, new boolean []
+      // {false, false, false}, true, true));// THIS NEEDS TO CHANGE FOR YOUR
+      // APPLICATION
 
    }
 
    public int GetTotalQueries()
    {
       return m_queryArray.size();
+   }
+   
+   public String getQueryButtonText(int queryChoice)
+   {
+      QueryData e = m_queryArray.get(queryChoice);
+      return e.getQueryButtonText();
    }
 
    public int GetParameterAmtForQuery(int queryChoice)
@@ -325,7 +355,6 @@ public class QueryRunner
 
    public static void main(String[] args)
    {
-
 
       final QueryRunner queryrunner = new QueryRunner();
 

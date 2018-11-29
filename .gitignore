@@ -1,4 +1,5 @@
-.gitignore
-/bin/
+.DS_Store
 .classpath
 .settings
+.project
+CoffeeShopGUI/bin
