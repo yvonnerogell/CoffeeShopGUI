@@ -335,7 +335,7 @@ public class QueryFrame extends javax.swing.JFrame {
 
 		String szStripChoice = szChoice.substring(0, 1);
 		szChoice = szChoice.substring(2);
-		m_queryChoice = Integer.parseInt(szStripChoice) - 1;
+		m_queryChoice = Integer.parseInt(szStripChoice);
 		String szQuery = m_queryrunner.GetQueryText(m_queryChoice);
 		String queryDesc = m_queryrunner.getQueryDesc(m_queryChoice);
 		this.jTextArea1.setText(queryDesc);
