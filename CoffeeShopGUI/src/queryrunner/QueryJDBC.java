@@ -17,9 +17,8 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- * @author mckeem
+ * @author Yvonne Rogell, Emily Desmond, Stephanie Peters, Zachary Bax
  */
-
 public class QueryJDBC {
 
 	public Connection m_conn = null;

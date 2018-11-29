@@ -4,11 +4,6 @@
  * and open the template in the editor.
  */
 package queryrunner;
-
-/**
- *
- * @author mckeem
- */
 import java.util.ArrayList;
 import java.util.List;
 import java.awt.BorderLayout;
@@ -19,6 +14,9 @@ import javax.swing.*;
 import java.awt.Font;
 import java.awt.SystemColor;
 
+/**
+ * @author Yvonne Rogell, Emily Desmond, Stephanie Peters, Zachary Bax
+ */
 public class QueryFrame extends javax.swing.JFrame {
 
 	/**

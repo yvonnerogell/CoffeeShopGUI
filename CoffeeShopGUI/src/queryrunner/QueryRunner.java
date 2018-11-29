@@ -4,16 +4,16 @@
  * and open the template in the editor.
  */
 package queryrunner;
-
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+
 
 /**
  * QueryRunner takes a list of Queries that are initialized in it's constructor
@@ -21,6 +21,8 @@ import javax.swing.JPanel;
  * class which will enable MYSQL queries to be executed. It also has functions
  * to provide the returned data from the Queries. Currently the eventHandlers in
  * QueryFrame call these functions in order to run the Queries.
+ * 
+ * @author Yvonne Rogell, Emily Desmond, Stephanie Peters, Zachary Bax
  */
 public class QueryRunner {
 
