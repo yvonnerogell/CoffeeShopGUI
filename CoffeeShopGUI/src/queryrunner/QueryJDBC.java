@@ -20,239 +20,183 @@ import java.util.ArrayList;
  * @author mckeem
  */
 
-public class QueryJDBC
-{
+public class QueryJDBC {
 
-   public Connection m_conn = null;
-   //static final String DB_DRV = "jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-   static final String DB_DRV = "com.mysql.jdbc.Driver";
-   
-   // jdbc:mysql://localhost/db?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
-   String m_error = "";
-   String m_url;
-   String m_user;
-   String[] m_headers;
-   String[][] m_allRows;
-   int m_updateAmount = 0;
+	public Connection m_conn = null;
+	static final String DB_DRV = "com.mysql.jdbc.Driver";
 
-   QueryJDBC()
-   {
-      m_updateAmount = 0;
-   }
+	String m_error = "";
+	String m_url;
+	String m_user;
+	String[] m_headers;
+	String[][] m_allRows;
+	int m_updateAmount = 0;
 
-   public String GetError()
-   {
-      return m_error;
-   }
+	QueryJDBC() {
+		m_updateAmount = 0;
+	}
 
-   public String[] GetHeaders()
-   {
-      return this.m_headers;
-   }
+	public String GetError() {
+		return m_error;
+	}
 
-   public String[][] GetData()
-   {
-      return this.m_allRows;
-   }
+	public String[] GetHeaders() {
+		return this.m_headers;
+	}
 
-   public int GetUpdateCount()
-   {
-      return m_updateAmount;
-   }
+	public String[][] GetData() {
+		return this.m_allRows;
+	}
 
-   // We think we can always setString on Parameters. Not sure
-   // if this is true.
-   // GetString on Results is fine though
+	public int GetUpdateCount() {
+		return m_updateAmount;
+	}
 
-   public boolean ExecuteQuery(String szQuery, String[] parms,
-         boolean[] likeparms)
-   {
-      PreparedStatement preparedStatement = null;
-      ResultSet resultSet = null;
-      int nColAmt;
-      boolean bOK = true;
-      // Try to get the columns and the amount of columns
-      try
-      {
+	public boolean ExecuteQuery(String szQuery, String[] parms,
+			boolean[] likeparms) {
+		PreparedStatement preparedStatement = null;
+		ResultSet resultSet = null;
+		int nColAmt;
+		boolean bOK = true;
+		// Try to get the columns and the amount of columns
+		try {
+			preparedStatement = this.m_conn.prepareStatement(szQuery);
+			int nParamAmount = parms.length;
+			for (int i = 0; i < nParamAmount; i++) {
+				String parm = parms[i];
+				if (likeparms[i] == true) {
+					parm += "%";
+				}
+				preparedStatement.setString(i + 1, parm);
+			}
+			// preparedStatement.setString(1, "%" + szContact + "%");
+			resultSet = preparedStatement.executeQuery();
+			ResultSetMetaData rsmd = resultSet.getMetaData();
+			nColAmt = rsmd.getColumnCount();
+			m_headers = new String[nColAmt];
 
-         preparedStatement = this.m_conn.prepareStatement(szQuery);
+			for (int i = 0; i < nColAmt; i++) {
+				m_headers[i] = rsmd.getColumnLabel(i + 1);
+			}
+			//
+			int amtRow = 0;
+			while (resultSet.next()) {
+				amtRow++;
+			}
+			if (amtRow > 0) {
+				this.m_allRows = new String[amtRow][nColAmt];
+				resultSet.beforeFirst();
+				int nCurRow = 0;
+				while (resultSet.next()) {
+					for (int i = 0; i < nColAmt; i++) {
+						m_allRows[nCurRow][i] = resultSet.getString(i + 1);
+					}
+					nCurRow++;
+				}
+			} else {
+				this.m_allRows = new String[1][nColAmt];
+				for (int i = 0; i < nColAmt; i++) {
+					m_allRows[0][i] = "";
+				}
+			}
+			preparedStatement.close();
+			resultSet.close();
+		} catch (SQLException ex) {
+			bOK = false;
+			this.m_error = "SQLException: " + ex.getMessage();
+			this.m_error += "SQLState: " + ex.getSQLState();
+			this.m_error += "VendorError: " + ex.getErrorCode();
 
-         int nParamAmount = parms.length;
+			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
+			return false;
+		}
+		return true;
+	}
 
-         for (int i = 0; i < nParamAmount; i++)
-         {
-            String parm = parms[i];
-            if (likeparms[i] == true)
-            {
-               parm += "%";
-            }
-            preparedStatement.setString(i + 1, parm);
+	public boolean ExecuteUpdate(String szQuery, String[] parms) {
+		PreparedStatement preparedStatement = null;
 
-         }
+		boolean bOK = true;
+		m_updateAmount = 0;
 
-         // preparedStatement.setString(1, "%" + szContact + "%");
-         resultSet = preparedStatement.executeQuery();
+		// Try to get the columns and the amount of columns
+		try {
 
-         ResultSetMetaData rsmd = resultSet.getMetaData();
-         nColAmt = rsmd.getColumnCount();
-         m_headers = new String[nColAmt];
+			preparedStatement = this.m_conn.prepareStatement(szQuery);
 
-         for (int i = 0; i < nColAmt; i++)
-         {
-            m_headers[i] = rsmd.getColumnLabel(i + 1);
-         }
-         //
-         int amtRow = 0;
-         while (resultSet.next())
-         {
-            amtRow++;
-         }
-         if (amtRow > 0)
-         {
-            this.m_allRows = new String[amtRow][nColAmt];
-            resultSet.beforeFirst();
-            int nCurRow = 0;
-            while (resultSet.next())
-            {
-               for (int i = 0; i < nColAmt; i++)
-               {
-                  m_allRows[nCurRow][i] = resultSet.getString(i + 1);
-               }
-               nCurRow++;
-            }
-         }
-         else
-         {
-            this.m_allRows = new String[1][nColAmt];
-            for (int i = 0; i < nColAmt; i++)
-            {
-               m_allRows[0][i] = "";
-            }
-         }
+			int nParamAmount = parms.length;
 
-         preparedStatement.close();
-         resultSet.close();
-      }
+			for (int i = 0; i < nParamAmount; i++) {
+				preparedStatement.setString(i + 1, parms[i]);
+			}
 
-      catch (SQLException ex)
-      {
-         bOK = false;
-         this.m_error = "SQLException: " + ex.getMessage();
-         this.m_error += "SQLState: " + ex.getSQLState();
-         this.m_error += "VendorError: " + ex.getErrorCode();
+			m_updateAmount = preparedStatement.executeUpdate();
+			preparedStatement.close();
+		}
 
-         System.out.println("SQLException: " + ex.getMessage());
-         System.out.println("SQLState: " + ex.getSQLState());
-         System.out.println("VendorError: " + ex.getErrorCode());
-         return false;
+		catch (SQLException ex) {
+			bOK = false;
+			this.m_error = "SQLException: " + ex.getMessage();
+			this.m_error += "SQLState: " + ex.getSQLState();
+			this.m_error += "VendorError: " + ex.getErrorCode();
 
-      }
+			System.out.println("SQLException: " + ex.getMessage());
+			System.out.println("SQLState: " + ex.getSQLState());
+			System.out.println("VendorError: " + ex.getErrorCode());
+			return false;
 
-      return true;
-   }
+		}
 
-   public boolean ExecuteUpdate(String szQuery, String[] parms)
-   {
-      PreparedStatement preparedStatement = null;
+		return true;
+	}
 
-      boolean bOK = true;
-      m_updateAmount = 0;
+	public boolean ConnectToDatabase(String host, String user, String pass,
+			String database) {
+		String url;
+		url = "jdbc:mysql://";
+		url += host;
+		url += ":3306/";
+		url += database;
+		url += "?allowMultiQueries=true&useLegacyDatetimeCode=false&serverTimezone=America/Los_Angeles";
+		try {
 
-      // Try to get the columns and the amount of columns
-      try
-      {
+			Class.forName(DB_DRV).newInstance();
+			m_conn = DriverManager.getConnection(url, user, pass);
 
-         preparedStatement = this.m_conn.prepareStatement(szQuery);
+		} catch (SQLException ex) {
+			m_error = "SQLException: " + ex.getMessage() + ex.getSQLState()
+					+ ex.getErrorCode();
+			return false;
+		} catch (Exception ex) {
+			// handle the error
+			m_error = "SQLException: " + ex.getMessage();
+		}
 
-         int nParamAmount = parms.length;
+		return true;
+	}
 
-         for (int i = 0; i < nParamAmount; i++)
-         {
-            preparedStatement.setString(i + 1, parms[i]);
-         }
+	/*
+	 * Document this function // TODO
+	 */
+	public boolean CloseDatabase() {
+		try {
 
-         m_updateAmount = preparedStatement.executeUpdate();
-         preparedStatement.close();
-      }
+			m_conn.close();
 
-      catch (SQLException ex)
-      {
-         bOK = false;
-         this.m_error = "SQLException: " + ex.getMessage();
-         this.m_error += "SQLState: " + ex.getSQLState();
-         this.m_error += "VendorError: " + ex.getErrorCode();
+		} catch (SQLException ex) {
 
-         System.out.println("SQLException: " + ex.getMessage());
-         System.out.println("SQLState: " + ex.getSQLState());
-         System.out.println("VendorError: " + ex.getErrorCode());
-         return false;
+			m_error = "SQLException: " + ex.getMessage();
+			m_error = "SQLState: " + ex.getSQLState();
+			m_error = "VendorError: " + ex.getErrorCode();
+			return false;
+		} catch (Exception ex) {
+			m_error = "Error was " + ex.toString();
+			return false;
+		}
 
-      }
-
-      return true;
-   }
-
-   public boolean ConnectToDatabase(String host, String user, String pass,
-         String database)
-   {
-      String url;
-      
-      //cssql.seattleu.edu:3306/mm_sttest6b?useLegacyDatetimeCode=false&serverTimezone=America/Los_Angeles
-
-      url = "jdbc:mysql://";
-      url += host;
-      url += ":3306/";
-      url += database;
-      url += "?allowMultiQueries=true&useLegacyDatetimeCode=false&serverTimezone=America/Los_Angeles";
-      try
-      {
-
-         Class.forName(DB_DRV).newInstance();
-         m_conn = DriverManager.getConnection(url, user, pass);
-
-      }
-      catch (SQLException ex)
-      {
-         m_error = "SQLException: " + ex.getMessage() +
-               ex.getSQLState() +
-               ex.getErrorCode();
-         return false;
-      }
-      catch (Exception ex)
-      {
-         // handle the error
-         m_error = "SQLException: " + ex.getMessage();
-      }
-
-      return true;
-   }
-
-   /*
-    * Document this function // TODO
-    */
-   public boolean CloseDatabase()
-   {
-      try
-      {
-
-         m_conn.close();
-
-      }
-      catch (SQLException ex)
-      {
-
-         m_error = "SQLException: " + ex.getMessage();
-         m_error = "SQLState: " + ex.getSQLState();
-         m_error = "VendorError: " + ex.getErrorCode();
-         return false;
-      }
-      catch (Exception ex)
-      {
-         m_error = "Error was " + ex.toString();
-         return false;
-      }
-
-      return true;
-   }
+		return true;
+	}
 
 }

@@ -10,92 +10,65 @@ import java.util.ArrayList;
 /**
  * @author mckeem
  */
-public class QueryData
-{
-   QueryData()
-   {
-      /**
-       * HELLO HELLO HELLO YVONNE
-       */
-   }
-//    QueryData(String query)
-//    {
-//        m_queryString = query;
-//    }
+public class QueryData {
+	QueryData() {
+	}
 
-   QueryData(String buttonText, String desc, String query, String[] parms, boolean[] likeparms,
-         boolean isAction, boolean isParm)
-   {
-      m_queryButtonText = buttonText;
-      m_queryDesc = desc;
-      m_queryString = query;
-      m_arrayParms = parms;
-      m_arrayLikeParms = likeparms;
-      m_isAction = isAction;
-      m_isParms = isParm;
-   }
+	QueryData(String buttonText, String desc, String query, String[] parms,
+			boolean[] likeparms, boolean isAction, boolean isParm) {
+		m_queryButtonText = buttonText;
+		m_queryDesc = desc;
+		m_queryString = query;
+		m_arrayParms = parms;
+		m_arrayLikeParms = likeparms;
+		m_isAction = isAction;
+		m_isParms = isParm;
+	}
 
-//    void Set(String query, ArrayList<String>parms, boolean isAction, boolean isParm)
-//    {
-//        m_queryString = query;
-//        m_arrayParms = parms;
-//        m_isAction = isAction;
-//        m_isParms = isParm;
-//    }
-   
-   String getQueryButtonText()
-   {
-      return m_queryButtonText;
-   }
+	String getQueryButtonText() {
+		return m_queryButtonText;
+	}
 
-   String getQueryDesc()
-   {
-      return m_queryDesc;
-   }
+	String getQueryDesc() {
+		return m_queryDesc;
+	}
 
-   String GetQueryString()
-   {
-      return m_queryString;
-   }
+	String GetQueryString() {
+		return m_queryString;
+	}
 
-   int GetParmAmount()
-   {
-      if (m_arrayParms == null)
-         return 0;
-      else
-         return m_arrayParms.length;
-   }
+	int GetParmAmount() {
+		if (m_arrayParms == null)
+			return 0;
+		else
+			return m_arrayParms.length;
+	}
 
-   String GetParamText(int index)
-   {
-      return m_arrayParms[index];
-   }
+	String GetParamText(int index) {
+		return m_arrayParms[index];
+	}
 
-   boolean GetLikeParam(int index)
-   {
-      return m_arrayLikeParms[index];
-   }
+	boolean GetLikeParam(int index) {
+		return m_arrayLikeParms[index];
+	}
 
-   boolean[] GetAllLikeParams()
-   {
-      return m_arrayLikeParms;
-   }
+	boolean[] GetAllLikeParams() {
+		return m_arrayLikeParms;
+	}
 
-   boolean IsQueryAction()
-   {
-      return m_isAction;
-   }
+	boolean IsQueryAction() {
+		return m_isAction;
+	}
 
-   boolean IsQueryParm()
-   {
-      return m_isParms;
-   }
+	boolean IsQueryParm() {
+		return m_isParms;
+	}
 
-   private String m_queryButtonText;
-   private String m_queryString;
-   private String m_queryDesc;
-   private String[] m_arrayParms;
-   private boolean m_isAction;
-   private boolean m_isParms;
-   private boolean[] m_arrayLikeParms;
+	private String m_queryButtonText;
+	private String m_queryString;
+	private String m_queryDesc;
+	private String[] m_arrayParms;
+	private boolean m_isAction;
+	private boolean m_isParms;
+	private boolean[] m_arrayLikeParms;
 }

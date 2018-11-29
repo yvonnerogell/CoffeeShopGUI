@@ -30,7 +30,8 @@ public class QueryRunner {
 		m_queryArray = new ArrayList<>();
 		m_error = "";
 
-		String vendorListDesc = "List of vendors ordered by oldest to newest, " + "incl. column with years as vendor.";
+		String vendorListDesc = "List of vendors ordered by oldest to newest, "
+				+ "incl. column with years as vendor.";
 		String vendorListQuery = "SELECT VENDOR_COMPANY_NAME, YEAR(SYSDATE()) "
 				+ "- YEAR(VENDOR_SINCE_DATE) AS Num_Years_As_Vendor, VENDOR_SINCE_DATE "
 				+ "FROM VENDOR_LIST ORDER BY VENDOR_SINCE_DATE";
@@ -43,11 +44,13 @@ public class QueryRunner {
 				+ " FROM EQUIPMENT E JOIN EQUIPMENT_TYPE T ON E.EQUIP_TYPE_ID = "
 				+ "T.EQUIP_TYPE_ID ORDER BY NEXT_SERVICE_DATE";
 
-		String storeContactQueryDesc = "Number of employees per store with " + "store/manager contact information";
+		String storeContactQueryDesc = "Number of employees per store with "
+				+ "store/manager contact information";
 		String storeContactQuery = "SELECT E.STORE_ID, CONCAT(S.STORE_ADDRESS_ST_NUMBER, \" \", "
 				+ "S.STORE_ADDRESS_STREET_NAME) AS LOCATION, COUNT(*) as NUMBER_OF_EMPS,"
 				+ "CONCAT(E.EMP_FNAME, \" \", E.EMP_LNAME) AS MANAGER, S.STORE_PHONE, "
-				+ "E.EMP_PHONE FROM EMPLOYEE E INNER JOIN STORE S on " + "E.STORE_ID = S.STORE_ID GROUP BY S.STORE_ID;";
+				+ "E.EMP_PHONE FROM EMPLOYEE E INNER JOIN STORE S on "
+				+ "E.STORE_ID = S.STORE_ID GROUP BY S.STORE_ID;";
 
 		String recipeQueryDesc = "Recipe for each menu item";
 		String recipeQuery = "SELECT MENU_ITEM_DESC, COMP_PROD_DESC, COMP_PROD_QTY_PER_1_MENU_ITEM,"
@@ -67,14 +70,16 @@ public class QueryRunner {
 		String farmerCertDesc = "All farmers and their certifications.";
 		String farmerCertQuery = "SELECT v.VENDOR_COMPANY_NAME, cf.FARMER_CERT_DATE, c.CERT_DESC"
 				+ " FROM COFFEE_FARMER_has_CERTIFICATION cf, VENDOR_LIST v, CERTIFICATION c "
-				+ "WHERE v.vendor_id = cf.vendor_id AND cf.cert_id = c.cert_id " + "ORDER BY v.vendor_company_name";
+				+ "WHERE v.vendor_id = cf.vendor_id AND cf.cert_id = c.cert_id "
+				+ "ORDER BY v.vendor_company_name";
 
 		String farmerProdDesc = "Calculating each farmer's productivity (yield/acre)";
 		String farmerProdQuery = "SELECT COFFEE_FARMER.VENDOR_ID, "
 				+ "VENDOR_LIST.VENDOR_COMPANY_NAME, VENDOR_LIST.VENDOR_ADDRESS_COUNTRY, "
 				+ "ROUND(COFFEE_FARMER.COFFEE_FARMER_ANNUAL_YIELD / COFFEE_FARMER.COFFEE_FARMER_ACREAGE, 2) "
 				+ "AS YIELD_PER_ACRE FROM COFFEE_FARMER JOIN VENDOR_LIST ON "
-				+ "COFFEE_FARMER.VENDOR_ID = VENDOR_LIST.VENDOR_ID ORDER BY " + "YIELD_PER_ACRE DESC";
+				+ "COFFEE_FARMER.VENDOR_ID = VENDOR_LIST.VENDOR_ID ORDER BY "
+				+ "YIELD_PER_ACRE DESC";
 
 		String totalSalesDesc = "Total sales by menu item\n\nEnter dates in the following format: yyyy-mm-dd";
 		String totalSalesQuery = "SELECT MENU_ITEM_DESC,ROUND(SUM(TRANS_LINE_ITEM_UNIT_QTY * "
@@ -85,14 +90,16 @@ public class QueryRunner {
 				+ " MENU_ITEM_DESC WITH ROLLUP";
 
 		String addStoreDesc = "Open a new store and promote an existing employee from another store to manager of the new store";
-		String addStore = "INSERT INTO STORE " + "	(STORE_PHONE, " + "    STORE_ADDRESS_ST_NUMBER, "
-				+ "    STORE_ADDRESS_STREET_NAME, " + "    STORE_ADDRESS_CITY, " + "    STORE_ADDRESS_STATE, "
-				+ "    STORE_ADDRESS_ZIP, " + "    STORE_OPEN_DATE) " + "VALUES(?, ?, ?, ?, ?, ?, curdate()); " +
+		String addStore = "INSERT INTO STORE " + "	(STORE_PHONE, "
+				+ "    STORE_ADDRESS_ST_NUMBER, "
+				+ "    STORE_ADDRESS_STREET_NAME, " + "    STORE_ADDRESS_CITY, "
+				+ "    STORE_ADDRESS_STATE, " + "    STORE_ADDRESS_ZIP, "
+				+ "    STORE_OPEN_DATE) "
+				+ "VALUES(?, ?, ?, ?, ?, ?, curdate()); " +
 
 				"UPDATE EMPLOYEE E "
 				+ "SET E.JOB_TITLE_ID = 1, E.EMP_HOURLY_PAY_RATE = ?, E.STORE_ID = (SELECT LAST_INSERT_ID()) "
 				+ "WHERE E.EMPLOYEE_ID = ?; " + "COMMIT;";
-
 
 		this.m_projectTeamApplication = "No Dozin' Coffee Roasters";
 
@@ -125,19 +132,29 @@ public class QueryRunner {
 		String salesButton = "8 Sales";
 		String addStoreButton = "9 Add store";
 
-		m_queryArray.add(new QueryData(vendorButton, vendorListDesc, vendorListQuery, null, null, false, false)); 
-		m_queryArray.add(new QueryData(equipmentButton, equipServiceDesc, equipServiceQuery, null, null, false, false));																										// APPLICATION
-		m_queryArray.add(new QueryData(recipeButton, recipeQueryDesc, recipeQuery, null, null, false, false));
-		m_queryArray.add(new QueryData(profitButton, profitabilityDesc, profitabilityQuery, null, null, false, false));
-		m_queryArray.add(new QueryData(storeButton, storeContactQueryDesc, storeContactQuery, null, null, false, false));
-		m_queryArray.add(new QueryData(farmerCertButton, farmerCertDesc, farmerCertQuery, null, null, false, false));
-		m_queryArray.add(new QueryData(farmerProdButton, farmerProdDesc, farmerProdQuery, null, null, false, false));
-		m_queryArray.add(new QueryData(salesButton, totalSalesDesc, totalSalesQuery,
-				new String[] { "START_DATE", "END_DATE" }, new boolean[] { false, false }, false, true));
+		m_queryArray.add(new QueryData(vendorButton, vendorListDesc,
+				vendorListQuery, null, null, false, false));
+		m_queryArray.add(new QueryData(equipmentButton, equipServiceDesc,
+				equipServiceQuery, null, null, false, false)); // APPLICATION
+		m_queryArray.add(new QueryData(recipeButton, recipeQueryDesc,
+				recipeQuery, null, null, false, false));
+		m_queryArray.add(new QueryData(profitButton, profitabilityDesc,
+				profitabilityQuery, null, null, false, false));
+		m_queryArray.add(new QueryData(storeButton, storeContactQueryDesc,
+				storeContactQuery, null, null, false, false));
+		m_queryArray.add(new QueryData(farmerCertButton, farmerCertDesc,
+				farmerCertQuery, null, null, false, false));
+		m_queryArray.add(new QueryData(farmerProdButton, farmerProdDesc,
+				farmerProdQuery, null, null, false, false));
+		m_queryArray.add(new QueryData(salesButton, totalSalesDesc,
+				totalSalesQuery, new String[] { "START_DATE", "END_DATE" },
+				new boolean[] { false, false }, false, true));
 		m_queryArray.add(new QueryData(addStoreButton, addStoreDesc, addStore,
-				new String[] { "PHONE", "STREET_NUM", "STREET_NAME", "CITY", "STATE", "ZIP", "MANAGER_PAY",
-						"PROMOTED_EMP_ID" },
-				new boolean[] { false, false, false, false, false, false, false, false }, true, true));
+				new String[] { "PHONE", "STREET_NUM", "STREET_NAME", "CITY",
+						"STATE", "ZIP", "MANAGER_PAY", "PROMOTED_EMP_ID" },
+				new boolean[] { false, false, false, false, false, false, false,
+						false },
+				true, true));
 	}
 
 	public int GetTotalQueries() {
@@ -190,11 +207,11 @@ public class QueryRunner {
 
 	/**
 	 * After the query has been run, all of the data has been captured into a
-	 * multi-dimensional string array which contains all the row's. For each row it
-	 * also has all the column data. It is in string format
+	 * multi-dimensional string array which contains all the row's. For each row
+	 * it also has all the column data. It is in string format
 	 * 
-	 * @return multi-dimensional array of String data based on the result set from
-	 *         the query
+	 * @return multi-dimensional array of String data based on the result set
+	 *         from the query
 	 */
 	public String[][] GetQueryData() {
 		return m_jdbcData.GetData();
@@ -217,7 +234,8 @@ public class QueryRunner {
 	public boolean ExecuteQuery(int queryChoice, String[] parms) {
 		boolean bOK = true;
 		QueryData e = m_queryArray.get(queryChoice);
-		bOK = m_jdbcData.ExecuteQuery(e.GetQueryString(), parms, e.GetAllLikeParams());
+		bOK = m_jdbcData.ExecuteQuery(e.GetQueryString(), parms,
+				e.GetAllLikeParams());
 		return bOK;
 	}
 
@@ -229,9 +247,11 @@ public class QueryRunner {
 		return bOK;
 	}
 
-	public boolean Connect(String szHost, String szUser, String szPass, String szDatabase) {
+	public boolean Connect(String szHost, String szUser, String szPass,
+			String szDatabase) {
 
-		boolean bConnect = m_jdbcData.ConnectToDatabase(szHost, szUser, szPass, szDatabase);
+		boolean bConnect = m_jdbcData.ConnectToDatabase(szHost, szUser, szPass,
+				szDatabase);
 		if (bConnect == false)
 			m_error = m_jdbcData.GetError();
 		return bConnect;
@@ -288,7 +308,8 @@ public class QueryRunner {
 					System.out.print("Enter Database: ");
 					database = keyboard.nextLine();
 					// Use login credentials to connect to the database
-					boolean connected = queryrunner.Connect(hostname, username, password, database);
+					boolean connected = queryrunner.Connect(hostname, username,
+							password, database);
 					// Print a message to indicate whether login was successful
 					if (connected) {
 						System.out.println("Connected to the database.");
@@ -296,8 +317,9 @@ public class QueryRunner {
 					}
 					// If login fails, allow user to try again
 					else {
-						System.out.println("Login failed. Not connected to the database. "
-								+ "Would you like to try again? (y/n) ");
+						System.out.println(
+								"Login failed. Not connected to the database. "
+										+ "Would you like to try again? (y/n) ");
 						if (keyboard.nextLine().toLowerCase().charAt(0) == 'y')
 							repeat = true;
 					}
@@ -308,7 +330,8 @@ public class QueryRunner {
 				// Cycle through each query and execute it
 				for (int i = 0; i < numQueries; i++) {
 					// Determine if the query has parameters
-					int numParams = queryrunner.m_queryArray.get(i).GetParmAmount();
+					int numParams = queryrunner.m_queryArray.get(i)
+							.GetParmAmount();
 					String[] parameters = new String[numParams];
 					// Get the parameters from the user
 					// Recommended dates for most interesting results:
@@ -353,10 +376,13 @@ public class QueryRunner {
 				if (disconnected)
 					System.out.println("Disconnected from the database.");
 				else
-					System.out.println("ERROR: Failed to disconnect from the " + "database.");
+					System.out.println("ERROR: Failed to disconnect from the "
+							+ "database.");
 			} else {
-				System.out.println("usage: you must use -console as your argument "
-						+ "to get non-gui functionality. If you leave it out it will" + " be GUI");
+				System.out.println(
+						"usage: you must use -console as your argument "
+								+ "to get non-gui functionality. If you leave it out it will"
+								+ " be GUI");
 			}
 		}
 	}
