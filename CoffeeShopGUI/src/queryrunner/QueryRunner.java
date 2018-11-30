@@ -36,18 +36,18 @@ public class QueryRunner {
             "log in.\n " +
             "  .-~~-.\n" +
             ",|`-__- '|\n" +
-            "||       |\n" +
-            "`|       |\n" +
+            "||           |\n" +
+            "`|          |\n" +
             "  `-__- '";
       String helloQuery = "SELECT * FROM STORE";
 
-		String vendorListDesc = "List of vendors ordered by oldest to newest, "
+		String vendorListDesc = "List of vendors ordered by oldest to newest,\n"
 				+ "incl. column with years as vendor.";
 		String vendorListQuery = "SELECT VENDOR_COMPANY_NAME, YEAR(SYSDATE()) "
 				+ "- YEAR(VENDOR_SINCE_DATE) AS Num_Years_As_Vendor, VENDOR_SINCE_DATE "
 				+ "FROM VENDOR_LIST ORDER BY VENDOR_SINCE_DATE";
 
-		String equipServiceDesc = "Next service due date by piece of equipment";
+		String equipServiceDesc = "Next service due date by piece of equipment.";
 		String equipServiceQuery = "SELECT T.EQUIP_TYPE_DESC, E.STORE_ID, \r\n"
 				+ "E.EQUIP_PURCHASE_DATE, E.EQUIP_LAST_SERVICED, "
 				+ "E.EQUIP_SERVICE_FREQUENCY_DAYS, DATE_ADD(EQUIP_LAST_SERVICED, "
@@ -55,21 +55,21 @@ public class QueryRunner {
 				+ " FROM EQUIPMENT E JOIN EQUIPMENT_TYPE T ON E.EQUIP_TYPE_ID = "
 				+ "T.EQUIP_TYPE_ID ORDER BY NEXT_SERVICE_DATE";
 
-		String storeContactQueryDesc = "Number of employees per store with "
-				+ "store/manager contact information";
+		String storeContactQueryDesc = "Number of employees per store with\n"
+				+ "store/manager contact information.";
 		String storeContactQuery = "SELECT E.STORE_ID, CONCAT(S.STORE_ADDRESS_ST_NUMBER, \" \", "
 				+ "S.STORE_ADDRESS_STREET_NAME) AS LOCATION, COUNT(*) as NUMBER_OF_EMPS,"
 				+ "CONCAT(E.EMP_FNAME, \" \", E.EMP_LNAME) AS MANAGER, S.STORE_PHONE, "
 				+ "E.EMP_PHONE FROM EMPLOYEE E INNER JOIN STORE S on "
 				+ "E.STORE_ID = S.STORE_ID GROUP BY S.STORE_ID;";
 
-		String recipeQueryDesc = "Recipe for each menu item";
+		String recipeQueryDesc = "Recipe for each menu item.";
 		String recipeQuery = "SELECT MENU_ITEM_DESC, COMP_PROD_DESC, COMP_PROD_QTY_PER_1_MENU_ITEM,"
 				+ "COMP_PROD_UNIT_MEASUREMENT FROM MENU_ITEM M INNER JOIN "
 				+ "MENU_ITEM_contains_COMPONENT_PRODUCT MC ON M.MENU_ITEM_ID = MC.MENU_ITEM_ID INNER JOIN "
 				+ "COMPONENT_PRODUCT C ON MC.COMP_PROD_ID = C.COMP_PROD_ID";
 
-		String profitabilityDesc = "Menu item profitability";
+		String profitabilityDesc = "Menu item profitability.";
 		String profitabilityQuery = "SELECT MENU_ITEM_DESC, MENU_ITEM_RETAIL_PRICE, "
 				+ "ROUND(SUM(COMP_PROD_QTY_PER_1_MENU_ITEM * COMP_PROD_UNIT_COST),2) AS COGS, "
 				+ "ROUND((MENU_ITEM_RETAIL_PRICE - SUM(COMP_PROD_QTY_PER_1_MENU_ITEM * COMP_PROD_UNIT_COST)) "
@@ -84,7 +84,7 @@ public class QueryRunner {
 				+ "WHERE v.vendor_id = cf.vendor_id AND cf.cert_id = c.cert_id "
 				+ "ORDER BY v.vendor_company_name";
 
-		String farmerProdDesc = "Calculating each farmer's productivity (yield/acre)";
+		String farmerProdDesc = "Calculating each farmer's productivity (yield/acre).";
 		String farmerProdQuery = "SELECT COFFEE_FARMER.VENDOR_ID, "
 				+ "VENDOR_LIST.VENDOR_COMPANY_NAME, VENDOR_LIST.VENDOR_ADDRESS_COUNTRY, "
 				+ "ROUND(COFFEE_FARMER.COFFEE_FARMER_ANNUAL_YIELD / COFFEE_FARMER.COFFEE_FARMER_ACREAGE, 2) "
@@ -100,7 +100,9 @@ public class QueryRunner {
 				+ "M.MENU_ITEM_ID WHERE C.CUST_TRANS_DATE_TIME BETWEEN ? AND ? GROUP BY"
 				+ " MENU_ITEM_DESC WITH ROLLUP";
 
-		String addStoreDesc = "Open a new store and promote an existing employee from another store to manager of the new store";
+		String addStoreDesc = "Open a new store and promote an existing\nemployee from " +
+		      "another store to manager of the new\nstore.\n\nMANAGER_PAY [Enter an hourly wage]\nEMP_ID " +
+		      "[Enter the employee id of new store manager]";
 		String addStore = "INSERT INTO STORE " + "	(STORE_PHONE, "
 				+ "    STORE_ADDRESS_ST_NUMBER, "
 				+ "    STORE_ADDRESS_STREET_NAME, " + "    STORE_ADDRESS_CITY, "
