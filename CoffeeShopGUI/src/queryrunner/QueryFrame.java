@@ -6,8 +6,7 @@
 package queryrunner;
 
 /**
- *
- * @author mckeem
+ * @author Michael McKee, Zachary Bax, Emily Desmond, Stephanie Peters, Yvonne Rogell
  */
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +29,9 @@ public class QueryFrame extends javax.swing.JFrame {
 	 * @param queryrunnerObj
 	 */
 	public QueryFrame(QueryRunner queryrunnerObj) {
-		// getContentPane().add(panel);
-		// pack();
-		// setVisible(true);
+	   
+	   // Added background image and changed formatting and alignment of
+	   // several textfields, etc. 
 		getContentPane().setLayout(new BorderLayout());
 		setContentPane(new JLabel(new ImageIcon("Roasted_coffee_beans.jpg")));
 		getContentPane().setLayout(new FlowLayout());
@@ -83,16 +82,12 @@ public class QueryFrame extends javax.swing.JFrame {
 		jLabel10 = new javax.swing.JLabel();
 		jLabel11 = new javax.swing.JLabel();
 		jLabel12 = new javax.swing.JLabel();
-		
 		jTextField9 = new javax.swing.JTextField();
 		jTextField10 = new javax.swing.JTextField();
 		jTextField11 = new javax.swing.JTextField();
 		jTextField12 = new javax.swing.JTextField();
-		
 		jPanel2 = new javax.swing.JPanel();
-		
 		jComboBox1 = new javax.swing.JComboBox<>();
-		
 		jLabel5 = new javax.swing.JLabel();
 		jLabel5.setFont(new Font("Arial Black", Font.BOLD, 13));
 		jLabel6 = new javax.swing.JLabel();
@@ -103,12 +98,9 @@ public class QueryFrame extends javax.swing.JFrame {
 		jLabel7.setFont(new Font("Arial Black", Font.BOLD, 13));
 		jLabel8 = new javax.swing.JLabel();
 		jLabel8.setFont(new Font("Arial Black", Font.BOLD, 13));
-		
 		jButton1 = new javax.swing.JButton();
 		jButton2 = new javax.swing.JButton();
-		
 		jPasswordField1 = new javax.swing.JPasswordField();
-		
 		jLabel13 = new javax.swing.JLabel();
 		jLabel14 = new javax.swing.JLabel();
 		jLabel14.setVerticalAlignment(SwingConstants.TOP);
@@ -219,7 +211,6 @@ public class QueryFrame extends javax.swing.JFrame {
 		getContentPane().add(jPanel2,
 				new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, 1000,
 						240));
-		// jComboBox1.setOpaque(true);
 		jComboBox1.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				jComboBox1ActionPerformed(evt);
@@ -229,22 +220,18 @@ public class QueryFrame extends javax.swing.JFrame {
 				new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 190, 120,
 						-1));
 		jLabel5.setText(" Database");
-		// jLabel5.setOpaque(true);
 		getContentPane().add(jLabel5,
 				new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 90,
 						-1));
 		jLabel6.setText(" Hostname");
-		// jLabel6.setOpaque(true);
 		getContentPane().add(jLabel6,
 				new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 90,
 						-1));
 		jLabel7.setText(" User");
-		// jLabel7.setOpaque(true);
 		getContentPane().add(jLabel7,
 				new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 90,
 						-1));
 		jLabel8.setText(" Password");
-		// jLabel8.setOpaque(true);
 		getContentPane().add(jLabel8,
 				new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90,
 						-1));
@@ -258,7 +245,6 @@ public class QueryFrame extends javax.swing.JFrame {
 				new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, -1,
 						-1));
 		jButton2.setText("Run Query");
-		// jButton2.setOpaque(true);
 		jButton2.setBackground(SystemColor.window);
 		jButton2.addActionListener(new java.awt.event.ActionListener() {
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -334,8 +320,8 @@ public class QueryFrame extends javax.swing.JFrame {
 
 		jTextArea2.setText("");
 		String szChoice = (String) jComboBox1.getSelectedItem();
-
 		String szStripChoice = szChoice.substring(0, 1);
+		// Changed to extract the end of the button text. 
 		szChoice = szChoice.substring(2);
 		m_queryChoice = Integer.parseInt(szStripChoice);
 		String szQuery = m_queryrunner.GetQueryText(m_queryChoice);
@@ -460,7 +446,6 @@ public class QueryFrame extends javax.swing.JFrame {
 	private javax.swing.JTextField jTextField7;
 	private javax.swing.JTextField jTextField8;
 	private javax.swing.JTextField jTextField9;
-
 	private final JLabel[] m_parmlabels;
 	private JTextField[] m_textvals;
 	private QueryRunner m_queryrunner;

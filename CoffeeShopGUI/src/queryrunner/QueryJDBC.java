@@ -17,7 +17,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 /**
- * @author mckeem
+ * @author Michael McKee, Zachary Bax, Emily Desmond, Stephanie Peters, Yvonne Rogell
  */
 
 public class QueryJDBC {

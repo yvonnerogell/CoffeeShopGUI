@@ -21,6 +21,8 @@ import javax.swing.JPanel;
  * class which will enable MYSQL queries to be executed. It also has functions
  * to provide the returned data from the Queries. Currently the eventHandlers in
  * QueryFrame call these functions in order to run the Queries.
+ * 
+ * @author Michael McKee, Zachary Bax, Emily Desmond, Stephanie Peters, Yvonne Rogell
  */
 public class QueryRunner {
 
@@ -163,7 +165,7 @@ public class QueryRunner {
 				new boolean[] { false, false }, false, true));
 		m_queryArray.add(new QueryData(addStoreButton, addStoreDesc, addStore,
 				new String[] { "PHONE", "STREET_NUM", "STREET_NAME", "CITY",
-						"STATE", "ZIP", "MANAGER_PAY", "PROMOTED_EMP_ID" },
+						"STATE", "ZIP", "MANAGER_PAY", "EMP_ID" },
 				new boolean[] { false, false, false, false, false, false, false,
 						false },
 				true, true));
@@ -173,6 +175,7 @@ public class QueryRunner {
 		return m_queryArray.size();
 	}
 
+	// Added function to retrieve query button text for drop-down menu
 	public String getQueryButtonText(int queryChoice) {
 		QueryData e = m_queryArray.get(queryChoice);
 		return e.getQueryButtonText();
@@ -193,6 +196,7 @@ public class QueryRunner {
 		return e.GetQueryString();
 	}
 
+	// Added function to get description of query. 
 	public String getQueryDesc(int queryChoice) {
 		QueryData e = m_queryArray.get(queryChoice);
 		return e.getQueryDesc();

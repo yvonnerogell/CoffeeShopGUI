@@ -8,14 +8,16 @@ package queryrunner;
 import java.util.ArrayList;
 
 /**
- * @author mckeem
+ *  @author Michael McKee, Zachary Bax, Emily Desmond, Stephanie Peters, Yvonne Rogell
  */
 public class QueryData {
 	QueryData() {
 	}
 
 	QueryData(String buttonText, String desc, String query, String[] parms,
-			boolean[] likeparms, boolean isAction, boolean isParm) {
+			boolean[] likeparms, boolean isAction, boolean isParm) 
+	{
+	   // Added private fields: button text and query description
 		m_queryButtonText = buttonText;
 		m_queryDesc = desc;
 		m_queryString = query;
