@@ -14,6 +14,7 @@ import java.awt.FlowLayout;
 import javax.swing.*;
 import java.awt.Font;
 import java.awt.SystemColor;
+import java.net.URL;
 
 /**
  * @author Michael McKee, Zachary Bax, Emily Desmond, Stephanie Peters, Yvonne Rogell
@@ -33,7 +34,8 @@ public class QueryFrame extends javax.swing.JFrame {
 	   // Added background image and changed formatting and alignment of
 	   // several textfields, etc. 
 		getContentPane().setLayout(new BorderLayout());
-		setContentPane(new JLabel(new ImageIcon("Roasted_coffee_beans.jpg")));
+		URL url = QueryFrame.class.getResource("/img/Roasted_coffee_beans.jpg");
+		setContentPane(new JLabel(new ImageIcon(url)));
 		getContentPane().setLayout(new FlowLayout());
 		getContentPane().setBackground(new Color(153, 102, 51));
 		initComponents();
